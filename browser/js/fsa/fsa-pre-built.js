@@ -94,6 +94,14 @@
                 });
         };
 
+        this.login_facebook = function () {
+            return $http.get('/auth/facebook')
+                .then(onSuccessfulLogin)
+                .catch(function () {
+                    return $q.reject({ message: 'Invalid login credentials.' });
+                });
+        };
+
         this.logout = function () {
             return $http.get('/logout').then(function () {
                 Session.destroy();

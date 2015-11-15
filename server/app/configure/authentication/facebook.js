@@ -15,27 +15,30 @@ module.exports = function (app) {
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
+        process.nextTick(function(){
+            UserModel.findOne({ 'facebook.id': profile.id }).exec()
+                .then(function (user) {
 
-        UserModel.findOne({ 'facebook.id': profile.id }).exec()
-            .then(function (user) {
+                    if (user) {
+                        return user;
+                    } else {
+                        return UserModel.create({
+                            facebook: {
+                                id: profile.id,
+                                token: accessToken,
+                                name: profile.name.givenName+' '+profile.name.familyName,
+                                email: profile.emails[0]
+                            }
+                        });
+                    }
 
-                if (user) {
-                    return user;
-                } else {
-                    return UserModel.create({
-                        facebook: {
-                            id: profile.id
-                        }
-                    });
-                }
-
-            }).then(function (userToLogin) {
+                }).then(function (userToLogin) {
                 done(null, userToLogin);
             }, function (err) {
                 console.error('Error creating user from Facebook authentication', err);
                 done(err);
-            })
-
+            });
+        });
     };
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));

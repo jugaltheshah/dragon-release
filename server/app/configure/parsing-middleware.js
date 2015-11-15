@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 
 module.exports = function (app) {
 
+    app.use(cors());
+
     // Important to have this before any session middleware
     // because what is a session without a cookie?
     // No session at all.
