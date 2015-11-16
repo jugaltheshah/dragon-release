@@ -55,44 +55,34 @@ module.exports = function (app) {
                         // if there is a user id already but no token (user was linked at one point and then removed)
                         if (!user.facebook.token) {
                             user.facebook.token = token;
-                            user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                            //user.facebook.email = (profile.emails[0].value || '').toLowerCase();
-
-                            user.save(function(err) {
-                                if (err)
-                                    return done(err);
-
+                            user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                            user.save(function(error) {
+                                if (error)
+                                    return done(error);
                                 return done(null, user);
                             });
                         }
-
                         return done(null, user); // user found, return that user
                     } else {
                         // if there is no user, create them
-                        var newUser            = new UserModel();
-
-                        newUser.facebook.id    = profile.id;
+                        var newUser = new UserModel();
+                        newUser.facebook.id = profile.id;
                         newUser.facebook.token = token;
-                        newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                        //newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
-
-                        newUser.save(function(err) {
-                            if (err)
-                                return done(err);
+                        newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                        newUser.save(function(error) {
+                            if (error)
+                                return done(error);
 
                             return done(null, newUser);
                         });
                     }
                 });
-
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var user            = req.user; // pull the user out of the session
-
-                user.facebook.id    = profile.id;
+                var user = req.user; // pull the user out of the session
+                user.facebook.id = profile.id;
                 user.facebook.token = token;
-                user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                //user.facebook.email = (profile.emails[0].value || '').toLowerCase();
+                user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
 
                 user.save(function(err) {
                     if (err)

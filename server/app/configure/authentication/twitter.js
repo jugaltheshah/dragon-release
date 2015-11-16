@@ -16,28 +16,28 @@ module.exports = function (app) {
         passReqToCallback : true
     };
 
-    var createNewUser = function (token, tokenSecret, profile) {
-        console.log(token, tokenSecret);
-        return UserModel.create({
-            twitter: {
-                id: profile.id,
-                username: profile.username,
-                token: token,
-                tokenSecret: tokenSecret
-            }
-        });
-    };
-
-    var updateUserCredentials = function (user, token, tokenSecret, profile) {
-
-        user.twitter.token = token;
-        user.twitter.tokenSecret = tokenSecret;
-        user.twitter.username = profile.username;
-
-        return user.save();
-
-    };
-
+    //var createNewUser = function (token, tokenSecret, profile) {
+    //    console.log(token, tokenSecret);
+    //    return UserModel.create({
+    //        twitter: {
+    //            id: profile.id,
+    //            username: profile.username,
+    //            token: token,
+    //            tokenSecret: tokenSecret
+    //        }
+    //    });
+    //};
+    //
+    //var updateUserCredentials = function (user, token, tokenSecret, profile) {
+    //
+    //    user.twitter.token = token;
+    //    user.twitter.tokenSecret = tokenSecret;
+    //    user.twitter.username = profile.username;
+    //
+    //    return user.save();
+    //
+    //};
+    //
     //var verifyCallback = function (token, tokenSecret, profile, done) {
     //
     //    UserModel.findOne({'twitter.id': profile.id}).exec()
@@ -63,40 +63,32 @@ module.exports = function (app) {
 
             // check if the user is already logged in
             if (!req.user) {
-
                 UserModel.findOne({ 'twitter.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
-
                     if (user) {
                         // if there is a user id already but no token (user was linked at one point and then removed)
                         if (!user.twitter.token) {
-                            user.twitter.token       = token;
-                            user.twitter.username    = profile.username;
+                            user.twitter.token = token;
+                            user.twitter.username = profile.username;
                             user.twitter.displayName = profile.displayName;
-
-                            user.save(function(err) {
-                                if (err)
-                                    return done(err);
-
+                            user.save(function(error) {
+                                if (error)
+                                    return done(error);
                                 return done(null, user);
                             });
                         }
-
                         return done(null, user); // user found, return that user
                     } else {
                         // if there is no user, create them
-                        var newUser                 = new UserModel();
-
-                        newUser.twitter.id          = profile.id;
-                        newUser.twitter.token       = token;
-                        newUser.twitter.username    = profile.username;
+                        var newUser = new UserModel();
+                        newUser.twitter.id = profile.id;
+                        newUser.twitter.token = token;
+                        newUser.twitter.username = profile.username;
                         newUser.twitter.displayName = profile.displayName;
-
-                        newUser.save(function(err) {
-                            if (err)
-                                return done(err);
-
+                        newUser.save(function(error) {
+                            if (error)
+                                return done(error);
                             return done(null, newUser);
                         });
                     }
@@ -104,13 +96,11 @@ module.exports = function (app) {
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var user                 = req.user; // pull the user out of the session
-
-                user.twitter.id          = profile.id;
-                user.twitter.token       = token;
-                user.twitter.username    = profile.username;
+                var user = req.user; // pull the user out of the session
+                user.twitter.id = profile.id;
+                user.twitter.token = token;
+                user.twitter.username = profile.username;
                 user.twitter.displayName = profile.displayName;
-
                 user.save(function(err) {
                     if (err)
                         return done(err);
