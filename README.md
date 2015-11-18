@@ -22,8 +22,8 @@ git checkout develop (always start from develop latest version)
 
 git pull(update the current develop branch)
 
-git checkout –b <branch name>
+git checkout –b branch name
 
-git push origin <branch name>
+git push origin branch name
 
-git branch --set-upstream-to=origin/<branch name>
+git branch --set-upstream-to=origin/branch name
