@@ -1,20 +1,63 @@
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+<!--<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">-->
 
+    <!--<alert type="danger" ng-show="error">-->
+        <!--{{ error }}-->
+    <!--</alert>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="email">Email address</label>-->
+        <!--<input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="login-password">Password</label>-->
+        <!--<input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">-->
+    <!--</div>-->
+    <!--<button type="submit" class="btn btn-default">Submit</button>-->
+    <!--&lt;!&ndash;<button><a ng-click="loginFb()">Facebook</a></button>&ndash;&gt;-->
+    <!--<a href="/auth/facebook" target="_self">facebook</a>-->
+    <!--<a href="/auth/google" target="_self">google</a>-->
+    <!--<a href="/auth/twitter" target="_self">twitter</a>-->
+<!--</form>-->
+<div class="container" id="login-page">
     <alert type="danger" ng-show="error">
-        {{ error }}
+    {{ error }}
     </alert>
-
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+    <div class="row" id="auth-section">
+        <div class="col-md-4">
+            <div id="signup-section">
+                <input type="text" class="form-control" id="signup_email" placeholder="Email" ng-model="signup.email">
+                <input type="password" class="form-control" id="signup_password" placeholder="Password" ng-model="signup.password">
+                <div class="btn btn-warning" ng-click="sendSignup(signup)">Sign Up</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="login-section">
+                <input type="text" class="form-control" id="login_email" placeholder="Email" ng-model="login.email">
+                <input type="password" class="form-control" id="login_password" placeholder="Password" ng-model="login.password">
+                <div class="btn btn-success" ng-click="sendLogin(login)">Log In</div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div id="other-section">
+                <div id="facebook-section">
+                    <a class="btn btn-primary form-control" href="/auth/facebook" target="_self">
+                        <i class="fa fa-facebook"></i>
+                        <span class="whitea" >facebook</span>
+                    </a>
+                </div>
+                <div id="google-section">
+                    <a class="btn btn-info form-control" href="/auth/google" target="_self">
+                        <i class="fa fa-google"></i>
+                        <span class="whitea" >google</span>
+                    </a>
+                </div>
+                <div id="twitter-section">
+                    <a class="btn btn-danger form-control" href="/auth/twitter" target="_self">
+                        <i class="fa fa-twitter"></i>
+                        <span class="whitea">twitter</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    <!--<button><a ng-click="loginFb()">Facebook</a></button>-->
-    <a href="/auth/facebook" target="_self">facebook</a>
-    <a href="/auth/google" target="_self">google</a>
-    <a href="/auth/twitter" target="_self">twitter</a>
-</form>
+</div>
