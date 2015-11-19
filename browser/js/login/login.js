@@ -25,12 +25,9 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 
     };
 
-    $scope.loginFb = function () {
-        AuthService.login_facebook().then(function () {
-            $state.go('home');
-        }).catch(function () {
-            $scope.error = 'Invalid login credentials.';
-        });
-    };
+    $scope.sendSignup = function(signupInfo){
+        $scope.error = null;
+        console.log(signupInfo);
+    }
 
 });
