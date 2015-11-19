@@ -1,10 +1,10 @@
-app.factory('RandomGreetings', function () {
+app.factory('RandomMotto', function () {
 
     var getRandomFromArray = function (arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     };
 
-    var greetings = [
+    var motto = [
         'Sport up!',
         'teamwork makes the dream work',
         'Hello, simple human.',
@@ -13,13 +13,13 @@ app.factory('RandomGreetings', function () {
         'Life is short, Play Hard!',
         'Together Everyone Achieves More.',
         'United we play. United we win.',
-        'You may be strong but we are stronger.'
+        'You may be strong, but we are stronger.'
     ];
 
     return {
-        greetings: greetings,
-        getRandomGreeting: function () {
-            return getRandomFromArray(greetings);
+        motto: motto,
+        getRandomMotto: function () {
+            return getRandomFromArray(motto);
         }
     };
 
