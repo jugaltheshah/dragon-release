@@ -1,0 +1,32 @@
+<div ng-controller="updateEventCtrl">
+<form novalidation action="">
+	<div class="form-group">
+	<h1>Organize An Event</h1>
+	<input type="text" ng-model="reviseEvent.name" placeholder="activity name">
+	<input type="text" ng-model="reviseEvent.tag" placeholder="tags">	
+	<input type="text" ng-model="reviseEvent.numOfPeople"placeholder="number of people">	
+	<br>	
+	<br>	
+
+	<input type="text" ng-model="reviseEvent.date" placeholder="date">		
+	<input type="text" ng-model="reviseEvent.time" placeholder="time">		
+	<input type="text" ng-model="reviseEvent.feePerPerson" placeholder="estimated fee per person">		
+
+	<br>
+    <br>
+
+	<input type="text" ng-model="reviseEvent.location" placeholder="location">		
+	<input type="text" ng-model="reviseEvent.pic" placeholder="upload a pic">
+
+	<br>
+    <br>
+
+	<textarea class="form-control" rows="3" ng-model="reviseEvent.description" placeholder="short description"></textarea>
+	<br>	
+	<br>	
+		<button type="button"  class="btn btn-primary" ng-click="updateEvent()">create it now!</button>
+
+	</div>
+
+</form>
+</div>
