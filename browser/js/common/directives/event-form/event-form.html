@@ -1,0 +1,30 @@
+<div ng-controller="createEventCtrl">
+<form novalidation action="">
+	<div class="form-group">
+	<h1>Organize An Event</h1>
+	<input type="text" ng-model="event.name" placeholder="activity name">
+	<input type="text" ng-model="event.tag" placeholder="tags">	
+	<input type="text" ng-model="event.numOfPeople"placeholder="number of people">	
+	<br>	
+	<br>	
+
+	<input type="text" ng-model="event.date" placeholder="date">		
+	<input type="text" ng-model="event.time" placeholder="time">		
+	<input type="text" ng-model="event.feePerPerson" placeholder="estimated fee per person">		
+
+	<br>
+    <br>
+
+	<input type="text" ng-model="event.location" placeholder="location">		
+	<input type="text" ng-model="event.pic" placeholder="upload a pic">
+
+	<br>
+    <br>
+
+	<textarea class="form-control" rows="3" ng-model="event.description" placeholder="short description"></textarea>
+	<br>	
+	<br>
+	</div>
+		<a ng-click="fn()">click</a>
+</form>
+</div>
