@@ -14,5 +14,5 @@ app.controller('createEventCtrl', function ($scope) {
     $scope.createEvent = function () {
     	console.log($scope.newEvent.name)
     };
-
+    
 });
