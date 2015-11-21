@@ -4,15 +4,18 @@ app.directive('eventForm',function(){
 		templateUrl:'js/common/directives/event-form/event-form.html',
 		scope:{
 			event:"=",
-			fn:"&"
+			fn:"&",
+			type:'@'
 		},
-		controller:'createEventCtrl'
+		controller:'eventFormCtrl'
 
-	});
+	};
 });
 
 
-app.controller('createEventCtrl', function ($scope) {
-
+app.controller('eventFormCtrl', function ($scope) {
+	console.log($scope.type);
     $scope.event = {};
+ 
+
 });
