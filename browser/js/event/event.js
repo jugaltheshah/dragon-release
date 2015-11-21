@@ -19,14 +19,18 @@ app.config(function($stateProvider){
            url:'/events/create',
            templateUrl: 'js/event/create.html',
            controller: function($scope){
-               $scope.page="create";
+               $scope.create = function(para) {
+                    alert(para);
+                };
            }
        })
        .state('eventUpdate', {
            url:'/events/update/:id',
            templateUrl: 'js/event/update.html',
            controller: function($scope){
-               $scope.page="update";
+               $scope.update = function(para) {
+                    alert(para);
+                }
            }
        });
 });
