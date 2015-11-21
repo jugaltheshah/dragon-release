@@ -16,6 +16,5 @@ app.directive('eventForm',function(){
 app.controller('eventFormCtrl', function ($scope) {
 	console.log($scope.type);
     $scope.event = {};
- 
 
 });
