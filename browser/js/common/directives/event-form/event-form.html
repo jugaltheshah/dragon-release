@@ -23,8 +23,13 @@
                 <br>
                 <div class="row">
                     <div class="col-sm-4">
+   <!-- this shows the day   <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre> -->                    
+
                         <i class="fa fa-calendar fa-2x"></i>
-                        <input type="text" ng-model="event.date" placeholder="date">
+                        <input type="date" uib-datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+                        <span class="input-group-btn">
+
+              </span>
                     </div>
                     <div class="col-sm-4">
                         <i class="fa fa-clock-o fa-2x"></i>
@@ -56,14 +61,9 @@
                     <br>
                     <br>
                     <div class="text-center row">
-                		<a ng-click="fn({p:event})">{{type}}</a>
-
+                        <a ng-click="fn({p:event})">{{type}}</a>
                     </div>
                 </div>
         </form>
         </div>
     </div>
-
-
-
-
