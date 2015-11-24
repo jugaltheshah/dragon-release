@@ -1,0 +1,69 @@
+<div>
+    <div class="container-fluid">
+        <form novalidation action="">
+            <div class="form-group">
+                <h1 class="text-center"> {{type}} An Event</h1>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <i class="fa fa-futbol-o fa-2x"></i>
+                        <input type="text" ng-model="event.name" placeholder="activity name">
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="fa fa-tags fa-2x"></i>
+                        <input type="text" ng-model="event.tag" placeholder="tags">
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="fa fa-users fa-2x"></i>
+                        <input type="text" ng-model="event.numOfPeople" placeholder="number of people">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+   <!-- this shows the day   <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre> -->                    
+
+                        <i class="fa fa-calendar fa-2x"></i>
+                        <input type="date" uib-datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+                        <span class="input-group-btn">
+
+              </span>
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="fa fa-clock-o fa-2x"></i>
+                        <input type="text" ng-model="event.time" placeholder="time">
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="fa fa-usd fa-2x"></i>
+                        <input type="text" ng-model="event.feePerPerson" placeholder="estimated fee per person">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <i class="fa fa-map-marker fa-2x"></i>
+                        <input type="text" ng-model="event.location" placeholder="location">
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="fa fa-camera fa-2x"></i>
+                        <input type="text" ng-model="event.pic" placeholder="upload a pic">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <i class="fa fa-pencil fa-2x"></i>
+                        <textarea class="form-control" rows="3" ng-model="event.description" placeholder="short description"></textarea>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="text-center row">
+                        <a ng-click="fn({p:event})">{{type}}</a>
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
