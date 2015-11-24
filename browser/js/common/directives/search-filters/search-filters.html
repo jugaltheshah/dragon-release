@@ -1,0 +1,54 @@
+<div class="well">
+<form ng-submit="search()">
+	<div class="input-group">
+	  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+	  <input type="text" class="form-control" placeholder="Search by Sport, Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h4>Event Date</h4>
+			<div class="input-group">
+				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.current">
+				<label for="Happening_Now">Happening Now!</label>
+			</div>
+			<div class="input-group">
+				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.today">
+				<label for="Happening_Now">Happening Today</label>
+			</div>
+			<div class="input-group">
+				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.thisWeek">
+				<label for="Happening_Now">This Week</label>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<h4>Event Location</h4>
+			<div class="input-group">
+				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.walking">
+				<label for="Happening_Now">Walking Distance (within 2 miles)</label>
+			</div>
+			<div class="input-group">
+				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.biking">
+				<label for="Happening_Now">Biking Distance (within 5 Miles)</label>
+			</div>
+			<div class="input-group">
+				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.driving">
+				<label for="Happening_Now">Driving Distance (within 10 Miles)</label>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<h4> CALENDAR GOES HERE</h4>
+
+			<div class="dropdown" ng-model="searchSettings.sport">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+			    Filter by Sport
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li ng-repeat="sport in sportsList" value="{{sport}}">{{sport}}</li>
+			  </ul>
+			</div>
+		</div>
+
+		{{sportsList}}
+</form>
+</div>

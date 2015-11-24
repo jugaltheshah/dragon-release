@@ -12,9 +12,12 @@ app.factory('EventFactory', function(){
 		cycling: 'http://www.msnbc.com/sites/msnbc/files/2013/05/ap02050502257_1.jpg'
 	}
 
+	var sportsList = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling"]
+
 	return {
 		getUrl: function(type) {
 			return defaultImages[type];
-		}
+		},
+		sportsList: sportsList
 	}
 })

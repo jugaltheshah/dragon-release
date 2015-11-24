@@ -3,9 +3,10 @@ app.config(function($stateProvider){
        .state('eventList', {
            url:'/events',
            templateUrl: 'js/event/list.html',
-           controller: function($scope, uiGmapGoogleMapApi){
+           controller: function($scope, uiGmapGoogleMapApi, EventFactory){
                $scope.map = { center: { latitude: 40.773959, longitude: -73.970949 }, zoom: 14 };
                uiGmapGoogleMapApi.then(function(maps) {});
+               $scope.sportsList = EventFactory.sportsList
            }
        })
        .state('eventDetail', {
