@@ -33,4 +33,25 @@ app.config(function($stateProvider){
                 };
            }
        })
+       .state('userEdit', {
+           url: '/users/edit/:id',
+           templateUrl: 'js/user/edit.html',
+           resolve: {
+                user: function($stateParams, UserFactory){
+                    console.log($stateParams.id);
+
+                    return UserFactory.getUserById($stateParams.id);
+                },
+                states: function(Utils){
+                    return Utils.getStates();
+                }
+           },
+           controller: function($scope, user, states){
+                $scope.user = user;
+                $scope.allStates = states;
+                $scope.setState = function(state){
+                    $scope.user.address.state = state;
+                }
+           }
+       });
 });
