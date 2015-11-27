@@ -1,0 +1,220 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  color: #c0c0c0;
+  background-color: #808080;
+  background-size: 100% 100%;
+  height: 100%;
+  width: 100%;
+  font-family: monaco, Consolas, 'Lucida Console', monospace; }
+
+#main {
+  padding-top: 60px;
+  width: 1200px;
+  margin: 0 auto; }
+
+.whitea {
+  color: #ffffff; }
+
+#menu-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.7; }
+
+.spmclass {
+  text-align: center;
+  background: #404040;
+  border-right: 1px solid #404040 !important; }
+  .spmclass li:hover {
+    background: #808080; }
+  .spmclass li a:hover {
+    background: #808080;
+    color: #ffffff; }
+
+.spmenu-open {
+  box-shadow: 0px 5px 50px 10px #0f0f0f !important; }
+
+fullstack-logo {
+  display: block; }
+  fullstack-logo img {
+    display: block;
+    width: 100%; }
+
+navbar {
+  display: block;
+  background: white;
+  border-bottom: 1px solid black;
+  box-shadow: 1px 1px 14px -3px black; }
+  navbar .container {
+    width: 91%;
+    max-width: 1340px;
+    padding-top: 20px; }
+  navbar fullstack-logo {
+    margin-top: 5px;
+    margin-right: 20px;
+    width: 40px; }
+  navbar a {
+    color: black;
+    font-size: 16px; }
+  navbar .nav > li > a {
+    cursor: pointer;
+    transition: color 0.2s; }
+    navbar .nav > li > a.active {
+      color: #c80a0c; }
+    navbar .nav > li > a:hover {
+      background: none;
+      color: #f31214; }
+    navbar .nav > li > a:focus {
+      background: none; }
+  navbar .login-button {
+    float: right;
+    border: 1px solid black;
+    margin-top: 10px;
+    background: none;
+    outline: none !important; }
+  navbar .welcome {
+    float: right;
+    margin-top: 12px; }
+    navbar .welcome span {
+      color: white; }
+    navbar .welcome a {
+      color: #f30046;
+      cursor: pointer; }
+
+@media (max-width: 2880px) {
+  #home #overlay {
+    width: 100%;
+    top: 30%;
+    /* IMPORTANT */
+    text-align: center;
+    display: block;
+    position: absolute; }
+    #home #overlay h1 {
+      font-size: 60px;
+      color: #ffffff;
+      margin-bottom: 50px;
+      font-weight: inherit; }
+    #home #overlay .text-rotate {
+      width: 200px;
+      font-family: Papyrus, fantasy;
+      font-weight: bold; }
+  #home .btn-transparent {
+    background-color: transparent;
+    color: white; }
+  #home .search-bar {
+    display: inline-block;
+    width: 30%; } }
+
+#about {
+  margin: 0 auto;
+  width: 90%; }
+  #about:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #about p {
+    width: 40%;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 22px;
+    font-weight: 300;
+    float: left; }
+  #about .carousel {
+    float: right;
+    width: 55%;
+    overflow: hidden;
+    margin: 0 auto; }
+    #about .carousel .carousel-inner {
+      height: 500px !important; }
+    #about .carousel .carousel-control {
+      background: none; }
+    #about .carousel .carousel-indicators {
+      display: none; }
+    #about .carousel img {
+      max-width: 100%;
+      max-height: 500px;
+      display: block;
+      margin: 0 auto; }
+
+tutorial-section {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 20px 0 60px 0; }
+  tutorial-section > h1 {
+    margin: 20px 0 40px 0;
+    text-align: center;
+    font-weight: bold; }
+
+tutorial-video {
+  display: block;
+  width: 600px;
+  margin: 0 auto; }
+  tutorial-video h1 {
+    font-weight: 300;
+    font-size: 24px;
+    margin-bottom: 15px; }
+  tutorial-video iframe {
+    width: 600px;
+    height: 400px; }
+
+tutorial-section-menu {
+  display: block; }
+  tutorial-section-menu:after {
+    content: "";
+    display: table;
+    clear: both; }
+  tutorial-section-menu ul {
+    margin-left: 23px;
+    list-style-type: none;
+    font-weight: 300; }
+    tutorial-section-menu ul li {
+      float: left;
+      margin-right: 40px;
+      padding: 10px;
+      cursor: pointer; }
+      tutorial-section-menu ul li:hover {
+        background: #f3f3f3; }
+
+#login-form {
+  width: 60%;
+  margin: 0 auto; }
+
+#auth-section {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2);
+  padding: 50px;
+  background: url(http://i.stack.imgur.com/jGlzr.png) no-repeat; }
+  #auth-section #signup-section {
+    color: #0f0f0f;
+    padding-left: 50px; }
+    #auth-section #signup-section input {
+      width: 200px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+    #auth-section #signup-section .btn {
+      box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+  #auth-section #login-section {
+    color: #0f0f0f;
+    padding-left: 50px; }
+    #auth-section #login-section input {
+      width: 200px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+    #auth-section #login-section .btn {
+      box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+  #auth-section #other-section div {
+    margin-top: 30px;
+    margin-bottom: 30px; }
+  #auth-section #other-section #facebook-section {
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+  #auth-section #other-section #twitter-section {
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+  #auth-section #other-section #google-section {
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }

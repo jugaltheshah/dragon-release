@@ -7,8 +7,10 @@
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/ng-tags-input/build/ng-tags-input.css" />
     <link rel="stylesheet" type="text/css" href="/textangular/dist/textAngular.css" />
+    <link rel="stylesheet" type="text/css" href="/vendor/slide-and-push-menu/slide.and.push.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
+    <script src="/jquery/dist/jquery.js"></script>
     <script src="/angular/angular.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-bootstrap-npm/dist/angular-bootstrap.js"></script>
@@ -23,15 +25,23 @@
     <script src='/textangular/dist/textAngular-rangy.min.js'></script>
     <script src='/textangular/dist/textAngular-sanitize.min.js'></script>
     <script src='/textangular/dist/textAngular.min.js'></script>
+    <script src='/vendor/slide-and-push-menu/slide.and.push.js'></script>
     <script src="/main.js"></script>
     <style type="text/css">
      .angular-google-map-container { height: 400px; }
    </style>
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <navbar></navbar>
-    <div id="main" ui-view></div>
-
+<!--<navbar></navbar>-->
+    <div ui-view></div>
+    <button ng-push-menu="menu" id="menu-button"><i class="fa fa-bars fa-lg"></i></button>
+    <ng-slide-push-menu id="menu" position="left" fix-left="30px" spm-class="spmclass">
+        <ul class="list-group">
+            <li class="list-group-item"><a ui-sref="home">Home</a></li>
+            <li class="list-group-item"><a ui-sref="eventList">Events</a></li>
+            <li class="list-group-item"><a ui-sref="users">Players</a></li>
+        </ul>
+    </ng-slide-push-menu>
 </body>
 </html>
 
