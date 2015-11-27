@@ -1,8 +1,41 @@
 #home {
-  h1 {
-    margin-top: 40px;
-    margin-bottom: 200px;
-    text-align: center;
+  //h1 {
+  //  margin-top: 40px;
+  //  margin-bottom: 200px;
+  //  text-align: center;
+  //}
+  //#overlay {
+  //   position: absolute;
+  //   text-align: center;
+  //   top:300px;
+  //}
+  @media (max-width: 2880px) {
+    #overlay {
+      h1 {
+         font-size: 60px;
+         color: #ffffff;
+         margin-bottom: 50px;
+         font-weight: inherit;
+      }
+      .text-rotate{
+         width: 200px;
+        font-family: Papyrus, fantasy;
+        font-weight: bold;
+      }
+      width: 100%;
+      top: 30%; /* IMPORTANT */
+      text-align: center;
+      display: block;
+      position: absolute;
+    }
+    .btn-transparent {
+       background-color: transparent;
+      color: white;
+    }
+    .search-bar{
+       display: inline-block;
+       width: 30%;
+    }
   }
 }
 
