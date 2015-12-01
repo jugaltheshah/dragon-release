@@ -1,2 +1,5 @@
 
 <a ui-sref="userDetail({id: user.id})">user a</a>
+<div class="container">
+    <li ng-repeat="user in users"><a ui-sref="userDetail({id: user._id})">{{user.userName || user.email}}</a></li>
+</div>

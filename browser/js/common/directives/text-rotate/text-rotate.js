@@ -13,7 +13,7 @@ app.directive('rotateText',
             }
 
             element.text(scope.wordArr[0]); //displays "fun"
-            stopWord = $interval(updateWord, 2000); //start rotating 1 second after, changes every sec
+            var stopWord = $interval(updateWord, 2000); //start rotating 1 second after, changes every sec
 
             // listen on DOM destroy (removal) event
             // to prevent updating word after the DOM element was removed.

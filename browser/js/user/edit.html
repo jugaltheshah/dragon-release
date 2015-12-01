@@ -1,81 +1,154 @@
 <div class="container">
-    <form name="userForm">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="mike123@fsa.com">
-        </div>
-        <div class="form-group">
-            <label for="userName">User Name</label>
-            <input type="text" class="form-control" id="userName" ng-model="user.userName" placeholder="Papaya">
-        </div>
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" ng-model="user.firstName" placeholder="Mike">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" ng-model="user.lastName" placeholder="Smith">
-        </div>
-        <div class="form-group">
-            <label for="motto">Motto</label>
-            <input type="text" class="form-control" id="motto" ng-model="user.motto" placeholder="Little Asshole">
-        </div>
-
-        <div class="form-group">
-            <label for="address1">Address 1</label>
-            <input type="text" class="form-control" id="address1" ng-model="user.address.address1" placeholder="322 Broadway">
-        </div>
-        <div class="form-group">
-            <label for="address2">Address 2</label>
-            <input type="text" class="form-control" id="address2" ng-model="user.address.address2" placeholder="Apt 1C">
-        </div>
-        <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" ng-model="user.address.city" placeholder="New York">
-        </div>
-        <div class="form-group">
-            <label for="state-button">State</label>
-            <div class="btn-group" uib-dropdown>
-                <button id="state-button" type="button" class="btn btn-info">{{user.address.state}}</button>
-                <button type="button" class="btn btn-info" uib-dropdown-toggle>
-                    <span class="caret"></span>
-                    <span class="sr-only">Split button!</span>
-                </button>
-                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="state-button">
-                    <li role="menuitem" ng-repeat="state in allStates"><a ng-click="setState(state.abbreviation)">{{state.abbreviation}}</a></li>
-                </ul>
+    <uib-tabset justified="true">
+        <uib-tab heading="Step 1" active="tab1.active">
+            <form class="step1Form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="mike123@fsa.com">
+                </div>
+                <div class="form-group">
+                    <label for="userName">User Name</label>
+                    <input type="text" class="form-control" id="userName" ng-model="user.userName" placeholder="Papaya">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" ng-model="user.firstName" placeholder="Mike">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" ng-model="user.lastName" placeholder="Smith">
+                </div>
+                <div class="form-group">
+                    <label for="motto">Motto</label>
+                    <input type="text" class="form-control" id="motto" ng-model="user.motto" placeholder="Little Asshole">
+                </div>
+                <a class="btn btn-info" ng-click="tab2.active=true">Next</a>
+            </form>
+        </uib-tab>
+        <uib-tab heading="Step 2" active="tab2.active">
+            <div class="form-group">
+                <label for="address1">Address 1</label>
+                <input type="text" class="form-control" id="address1" ng-model="user.address.address1" placeholder="322 Broadway">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="zip">Zip</label>
-            <input type="text" class="form-control" id="zip" ng-model="user.address.zip" placeholder="10101">
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <editor id="description" content="user.description"></editor>
-        </div>
-        <div class="form-group">
-            <label for="links">Related Website</label>
-            <div class="btn btn-success btn-sm" ng-click="addLink()"><i class="fa fa-plus"></i></div>
-            <div ng-repeat="link in user.links">
-                <label>Website Name</label>
-                <input type="text" id="links" ng-model="link.name" placeholder="facebook">
-                <label>Website Url</label>
-                <input type="text" ng-model="link.url">
-
-                <div ng-show="link.url" class="btn btn-danger btn-sm" ><i ng-click="removeLink(link)" class="fa fa-minus"></i></div>
+            <div class="form-group">
+                <label for="address2">Address 2</label>
+                <input type="text" class="form-control" id="address2" ng-model="user.address.address2" placeholder="Apt 1C">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="image">Image Url</label>
-            <input type="text" class="form-control" id="image" ng-model="user.image">
-        </div>
-        <div class="well">
-            <label for="userTags">Tags</label>
-            <tags-input id="userTags" ng-model="user.tags"></tags-input>
-        </div>
-        <a ng-click="updateProfile()" class="btn btn-default">Submit</a>
-    </form>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" ng-model="user.address.city" placeholder="New York">
+            </div>
+            <div class="form-group">
+                <label for="state-button">State</label>
+                <div class="btn-group" uib-dropdown>
+                    <button id="state-button" type="button" class="btn btn-info">{{user.address.state}}</button>
+                    <button type="button" class="btn btn-info" uib-dropdown-toggle>
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="uib-dropdown-menu" role="menu" aria-labelledby="state-button">
+                        <li role="menuitem" ng-repeat="state in allStates"><a ng-click="setState(state.abbreviation)">{{state.abbreviation}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" id="zip" ng-model="user.address.zip" placeholder="10101">
+            </div>
+            <a class="btn btn-info" ng-click="tab1.active=true">Previous</a>
+            <a class="btn btn-info" ng-click="tab3.active=true">Next</a>
+        </uib-tab>
+        <uib-tab heading="Step 3" active="tab3.active">
+            <div class="well">
+                <label for="userInterests">Interests</label>
+                <tags-input id="userInterests" ng-model="user.interests"></tags-input>
+            </div>
+            <label for="description">Bio</label>
+            <editor id="description" content="user.bio"></editor>
+            <a class="btn btn-info" ng-click="tab2.active=true">Previous</a>
+            <a class="btn btn-success pull-right" ng-click="updateUser()">Update</a>
+        </uib-tab>
+    </uib-tabset>
 </div>
+<a class="btn btn-danger" ng-click="deleteUser(user._id)">Remove</a>
+<!--<div class="container">-->
+    <!--<form name="userForm">-->
+        <!--<div class="form-group">-->
+            <!--<label for="email">Email</label>-->
+            <!--<input type="email" class="form-control" id="email" ng-model="user.email" placeholder="mike123@fsa.com">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="userName">User Name</label>-->
+            <!--<input type="text" class="form-control" id="userName" ng-model="user.userName" placeholder="Papaya">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="firstName">First Name</label>-->
+            <!--<input type="text" class="form-control" id="firstName" ng-model="user.firstName" placeholder="Mike">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="lastName">Last Name</label>-->
+            <!--<input type="text" class="form-control" id="lastName" ng-model="user.lastName" placeholder="Smith">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="motto">Motto</label>-->
+            <!--<input type="text" class="form-control" id="motto" ng-model="user.motto" placeholder="Little Asshole">-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label for="address1">Address 1</label>-->
+            <!--<input type="text" class="form-control" id="address1" ng-model="user.address.address1" placeholder="322 Broadway">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="address2">Address 2</label>-->
+            <!--<input type="text" class="form-control" id="address2" ng-model="user.address.address2" placeholder="Apt 1C">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="city">City</label>-->
+            <!--<input type="text" class="form-control" id="city" ng-model="user.address.city" placeholder="New York">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="state-button">State</label>-->
+            <!--<div class="btn-group" uib-dropdown>-->
+                <!--<button id="state-button" type="button" class="btn btn-info">{{user.address.state}}</button>-->
+                <!--<button type="button" class="btn btn-info" uib-dropdown-toggle>-->
+                    <!--<span class="caret"></span>-->
+                    <!--<span class="sr-only">Split button!</span>-->
+                <!--</button>-->
+                <!--<ul class="uib-dropdown-menu" role="menu" aria-labelledby="state-button">-->
+                    <!--<li role="menuitem" ng-repeat="state in allStates"><a ng-click="setState(state.abbreviation)">{{state.abbreviation}}</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="zip">Zip</label>-->
+            <!--<input type="text" class="form-control" id="zip" ng-model="user.address.zip" placeholder="10101">-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label for="description">Description</label>-->
+            <!--<editor id="description" content="user.description"></editor>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="links">Related Website</label>-->
+            <!--<div class="btn btn-success btn-sm" ng-click="addLink()"><i class="fa fa-plus"></i></div>-->
+            <!--<div ng-repeat="link in user.links">-->
+                <!--<label>Website Name</label>-->
+                <!--<input type="text" id="links" ng-model="link.name" placeholder="facebook">-->
+                <!--<label>Website Url</label>-->
+                <!--<input type="text" ng-model="link.url">-->
+
+                <!--<div ng-show="link.url" class="btn btn-danger btn-sm" ><i ng-click="removeLink(link)" class="fa fa-minus"></i></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="image">Image Url</label>-->
+            <!--<input type="text" class="form-control" id="image" ng-model="user.image">-->
+        <!--</div>-->
+        <!--<div class="well">-->
+            <!--<label for="userTags">Tags</label>-->
+            <!--<tags-input id="userTags" ng-model="user.tags"></tags-input>-->
+        <!--</div>-->
+        <!--<a ng-click="updateProfile()" class="btn btn-default">Submit</a>-->
+    <!--</form>-->
+<!--</div>-->
 

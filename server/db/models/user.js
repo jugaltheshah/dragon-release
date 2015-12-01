@@ -3,8 +3,30 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+    userName: String,
+    firstName: String,
+    lastName: String,
+    gender: {type:String, enum: ['Male', 'Female']},
+    birthday: String,
+    profilePicture: String,
+    sports: [{
+        name: String,
+        level: Number
+    }],
+    interests: [{
+        text: String
+    }],
+    motto: String,
+    bio: String,
     email: {
         type: String
+    },
+    address: {
+        address1: String,
+        address2: String,
+        city: String,
+        state: String,
+        zip: String
     },
     password: {
         type: String

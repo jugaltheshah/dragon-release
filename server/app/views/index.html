@@ -31,7 +31,7 @@
      .angular-google-map-container { height: 400px; }
    </style>
 </head>
-<body ng-app="FullstackGeneratedApp">
+<body ng-app="FullstackGeneratedApp" ng-controller="mainCtrl">
 <!--<navbar></navbar>-->
     <div ui-view></div>
     <button ng-push-menu="menu" id="menu-button"><i class="fa fa-bars fa-lg"></i></button>
@@ -41,6 +41,11 @@
             <li class="list-group-item"><a ui-sref="eventList">Events</a></li>
             <li class="list-group-item"><a ui-sref="users">Players</a></li>
         </ul>
+        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <div ng-show="user" class="welcome">
+            <span>Welcome, {{ user.email }}!</span>
+            <a ng-click="logout()">Logout</a>
+        </div>
     </ng-slide-push-menu>
 </body>
 </html>
