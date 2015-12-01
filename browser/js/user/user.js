@@ -3,34 +3,76 @@ app.config(function($stateProvider){
        .state('users', {
            url: '/users',
            templateUrl: 'js/user/list.html',
-           controller: function($scope){
-
+           resolve: {
+               users: function(UserFactory){
+                   return UserFactory
+                       .getUsers()
+                       .then(function(res){
+                           return res.data;
+                       })
+               }
+           },
+           controller: function($scope, users){
+                $scope.users = users;
            }
        })
        .state('userDetail', {
            url: '/users/detail/:id',
            templateUrl: 'js/user/profile.html',
-           controller: function($scope){
-                $scope.user ={
-                    userName: 'Stewee',
-                    firstName: 'Stewart',
-                    lastName: 'Griffin',
-                    birth: {
-                        day: '15',
-                        month: '06',
-                        year: '2010'
-                    },
-                    motto: 'Little Asshold',
-                    address: {
-                        address1: '321 broadway',
-                        address2: 'apt 4c',
-                        city: 'new york',
-                        state: 'NY',
-                        country: 'USA'
-                    },
-                    about: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                    following: []
-                };
+           resolve: {
+               user: function(UserFactory, $stateParams){
+                   return UserFactory
+                       .getUserById($stateParams.id)
+                       .then(function(res){
+                           return res.data;
+                       })
+               }
+           },
+           controller: function($scope, user){
+               $scope.user = user;
            }
        })
+       .state('userEdit', {
+           url: '/users/edit/:id',
+           templateUrl: 'js/user/edit.html',
+           resolve: {
+                user: function($stateParams, UserFactory){
+                    return UserFactory
+                        .getUserById($stateParams.id)
+                        .then(function(res){
+                            return res.data;
+                        })
+                },
+                states: function(Utils){
+                    return Utils.getStates();
+                }
+           },
+           controller: function($scope, user, states, UserFactory, $state){
+                $scope.user = user;
+
+                $scope.allStates = states;
+
+                $scope.setState = function(state){
+                    $scope.user.address.state = state;
+                };
+
+                $scope.updateUser = function(){
+                    UserFactory
+                        .updateUser($scope.user)
+                        .then(function(res){
+                            $state.go('userDetail', {id:res.data._id});
+                            console.log('update user', res.data);
+                        });
+                };
+
+                $scope.deleteUser = function(id){
+                    UserFactory.removeUser(id)
+                        .then(function(res){
+                            if(res.data.ok){
+                                $state.go('home');
+                            }
+                        });
+                };
+           }
+       });
 });

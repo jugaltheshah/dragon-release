@@ -1,11 +1,17 @@
 <section id="home">
-    <div class="container-fluid">
-        <div class="jumbotron">
-            <h1>Our App</h1>
-
-            <rando-motto></rando-motto>
-
+    <div class="embed-responsive embed-responsive-16by9">
+        <video id="fullscreen-desktop" style="opacity:0.7" class="embed-responsive-item" autoplay="" loop="" muted>
+            <!--<source src="http://www.nickwooster.com/wp-content/themes/nickwooster/videos/video.mp4" type="video/mp4">-->
+            <!--<source src="/video/IMG_2808.MOV" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>-->
+            <source src="/video/basketball.mp4" type='video/mp4'>
+        </video>
+    </div>
+    <div id="overlay">
+        <h1>Let's [ <span class="text-rotate" rotate-text></span> ] Up!</h1>
+        <a class="btn btn-default btn-transparent">Join Us Now!</a>
+        <div>-- OR --</div>
+        <div class="search-bar">
+            <input class="form-control" placeholder="Search by Sport, Player, Location..." >
         </div>
-
     </div>
 </section>

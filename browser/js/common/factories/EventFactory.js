@@ -9,10 +9,11 @@ app.factory('EventFactory', function(){
 		skiing: 'http://www.home-hunts.net/wp-content/uploads/2015/01/Cauterets-skiing.jpg',
 		mountainbiking: 'http://finnohara.com/blog/wp-content/uploads/0000_FO_ATHLETES_961_1c_RGB.jpg',
 		surfing: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRcxSIHobLvgXMgy6g0u1yXjq9tH7ecOL03VCVIhmf-5_k9vEJC',
-		cycling: 'http://www.msnbc.com/sites/msnbc/files/2013/05/ap02050502257_1.jpg'
+		cycling: 'http://www.msnbc.com/sites/msnbc/files/2013/05/ap02050502257_1.jpg',
+		tennis: 'http://images.nymag.com/guides/everything/tennis/publiccourts080505_1_560.jpg'
 	}
 
-	var sportsList = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling"]
+	var sportsList = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling", 'Tennis'];
 
 	return {
 		getUrl: function(type) {

@@ -57,7 +57,6 @@ module.exports = function (app) {
     //};
 
     var verifyCallback = function(req, token, tokenSecret, profile, done) {
-
         // asynchronous
         process.nextTick(function() {
 

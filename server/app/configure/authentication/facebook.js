@@ -39,8 +39,9 @@ module.exports = function (app) {
     //    });
     //};
     var verifyCallback = function(req, token, refreshToken, profile, done) {
-
         // asynchronous
+
+        console.log(profile);
         process.nextTick(function() {
 
             // check if the user is already logged in
@@ -68,7 +69,7 @@ module.exports = function (app) {
                         var newUser = new UserModel();
                         newUser.facebook.id = profile.id;
                         newUser.facebook.token = token;
-                        newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                        newUser.facebook.displayName = profile.displayName;
                         newUser.save(function(error) {
                             if (error)
                                 return done(error);
@@ -98,21 +99,21 @@ module.exports = function (app) {
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));
 
-    //app.get('/auth/facebook', passport.authenticate('facebook'));
-    //
-    //app.get('/auth/facebook/callback',
-    //    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    //    function (req, res) {
-    //        res.redirect('/');
-    //    });
+    app.get('/auth/facebook', passport.authenticate('facebook'));
 
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
-    // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect : '/',
-            failureRedirect : '/login'
-        }));
+        passport.authenticate('facebook', { failureRedirect: '/login' }),
+        function (req, res) {
+            res.redirect('/');
+        });
+
+    //app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    //
+    //// handle the callback after facebook has authenticated the user
+    //app.get('/auth/facebook/callback',
+    //    passport.authenticate('facebook', {
+    //        successRedirect : '/',
+    //        failureRedirect : '/login'
+    //    }));
 
 };

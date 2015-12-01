@@ -6,14 +6,17 @@ var schema = new mongoose.Schema({
 		type: String,
 		required: true
 	}, 
+	sport: {
+		type: String,
+		required: true
+	},
 	host: {
 		type: String, 
 		required: true
 	},
 	date: {
-		type: Date,
+		type: String,
 		required: true
-		//default: (current date)
 	},
 	time: {
 		type: String,
@@ -32,15 +35,21 @@ var schema = new mongoose.Schema({
 	maxAttendees: {
 		type: Number
 	},
+	minAttendees: {
+		type: Number
+	},
 	fee: {
 		type: Number
 	},
 	image: {
 		type: String
 	},
+	video: {
+		type: String
+	},
 	description: {
 		type: String
-	}
+	},
 })
 
 
