@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <base href="/" />
-    <title>Fullstack Academy Generated Application</title>
+    <title>[Our App Name]</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/ng-tags-input/build/ng-tags-input.css" />
@@ -27,8 +27,14 @@
     <script src='/textangular/dist/textAngular.min.js'></script>
     <script src='/vendor/slide-and-push-menu/slide.and.push.js'></script>
     <script src="/main.js"></script>
+    <script>
+    var socket = io('http://localhost:1337');
+    socket.on('connected', function(data){
+        console.log(data.message);
+    });
+    </script>
     <style type="text/css">
-     .angular-google-map-container { height: 400px; }
+     .angular-google-map-container { height: 1000px; }
    </style>
 </head>
 <body ng-app="FullstackGeneratedApp" ng-controller="mainCtrl">

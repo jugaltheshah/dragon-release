@@ -9,11 +9,6 @@ body {
   width: 100%;
   font-family: monaco, Consolas, 'Lucida Console', monospace; }
 
-#main {
-  padding-top: 60px;
-  width: 1200px;
-  margin: 0 auto; }
-
 .whitea {
   color: #ffffff; }
 
