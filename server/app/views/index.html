@@ -43,7 +43,7 @@
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
+            <span>Welcome, {{ user.facebook.displayName || user.email}}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
     </ng-slide-push-menu>

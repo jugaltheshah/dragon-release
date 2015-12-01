@@ -53,52 +53,5 @@ module.exports = function (app) {
         passport.authenticate('local-login', authCb)(req, res, next);
 
     });
-    //
-    //var signupStrategyFn = function(req, email, password, done){
-    //    User.findOne({'email': email})
-    //        .then(function(user){
-    //            if(user) {
-    //                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-    //            }
-    //            else {
-    //                var newUser = new User();
-    //                newUser.email = email;
-    //                newUser.password = password;
-    //                return newUser.save();
-    //            }
-    //        })
-    //        .then(function(newUser){
-    //            return done(null, newUser);
-    //        });
-    //};
-    //
-    //passport.use('local-signup', new LocalStrategy({ usernameField : 'email', passwordField : 'password'}), signupStrategyFn);
-    //
-    //app.post('/signup', function (req, res, next) {
-    //
-    //    var authCb = function (err, user) {
-    //
-    //        if (err) return next(err);
-    //
-    //        if (!user) {
-    //            var error = new Error('Invalid login credentials.');
-    //            error.status = 401;
-    //            return next(error);
-    //        }
-    //
-    //        // req.logIn will establish our session.
-    //        req.logIn(user, function (loginErr) {
-    //            if (loginErr) return next(loginErr);
-    //            // We respond with a response object that has user with _id and email.
-    //            res.status(200).send({
-    //                user: _.omit(user.toJSON(), ['password', 'salt'])
-    //            });
-    //        });
-    //
-    //    };
-    //
-    //    passport.authenticate('local-signup', authCb)(req, res, next);
-    //
-    //});
 
 };

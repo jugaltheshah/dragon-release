@@ -60,6 +60,7 @@ app.config(function($stateProvider){
                     UserFactory
                         .updateUser($scope.user)
                         .then(function(res){
+                            $state.go('userDetail', {id:res.data._id});
                             console.log('update user', res.data);
                         });
                 };
