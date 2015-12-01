@@ -1,4 +1,4 @@
-app.factory('UserFactory', function(){
+app.factory('UserFactory', function($http){
 
 
     var users = [
@@ -27,16 +27,31 @@ app.factory('UserFactory', function(){
         }
     ];
     function getUsers() {
-        return users;
+        return $http.get('/api/users/');
     }
 
     function getUserById(id){
-        return users[0];
+        return $http.get('/api/users/' + id);
+    }
+
+    function updateUser(user){
+        return $http.put('/api/users/', user);
+    }
+
+    function createUser(user){
+        return $http.post('/api/users/', user);
+    }
+
+    function removeUser(id){
+        return $http.delete('/api/users/'+id);
     }
 
     return {
         getUsers: getUsers,
-        getUserById: getUserById
+        getUserById: getUserById,
+        updateUser: updateUser,
+        createUser: createUser,
+        removeUser: removeUser
     }
 
 });
