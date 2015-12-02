@@ -4,8 +4,10 @@
     </div>
     <div class="col-md-6">
         <search-filters></search-filters>
-        <a ui-sref="eventDetail({id:4})">
-            <event-detail></event-detail>
-        </a>
+        <div id="eventsList" overflow-y="scroll">
+	        <div ng-repeat="event in events">
+	        	<event-detail eventdata="event"></event-detail>
+	        </div>
+        </div>
     </div>
 </div>

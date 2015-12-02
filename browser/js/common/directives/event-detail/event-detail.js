@@ -1,10 +1,16 @@
-app.directive('eventDetail', function(EventFactory) {
+app.directive('eventDetail', function(Utils) {
 	return {
 		restrict: 'E',
+		scope: {
+			eventdata: '='
+		},
 		templateUrl: '/js/common/directives/event-detail/event-detail.html', 
 		link: function(scope, element, attrs){
-			scope.getImage = function(type) {
-				return EventFactory.getUrl(type);
+			var defaultImages = Utils.defaultImages;
+			scope.getImage = function() {
+				// type = type.toLowerCase();
+				// console.log(type);
+				return defaultImages[scope.eventdata.sport.toLowerCase()];
 			}
 		}
 	}

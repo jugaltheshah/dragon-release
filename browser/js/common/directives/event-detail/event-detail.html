@@ -1,27 +1,28 @@
 <div class="well" style="color: black;">
+	<h1>{{eventdata.sport}}</h1>
 	<div class="row ">
 		<div class="col-md-2">
 			<a href="#">
-				<img class="img-responsive" style="width:100px; height:100px" ng-src="{{getImage('basketball')}}">
+				<img class="img-responsive" style="width:100px; height:100px" src="{{getImage()}}">
 			</a>
 		</div>
 		<div class="col-md-4">
-			<h5>{{event.title}}Awesome Laser Tag</h5>
+			<h5>{{eventdata.title}}</h5>
 			<div>
-			<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif"><span>{{event.host}}Bryce</span>
+			<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif"><span>{{eventdata.host}}</span>
 			</div>
 			<div>
-				<span>{{event.date}}12/26/2015</span><span>{{event.time}} 7:30PM</span>
+				<span>{{eventdata.date}}</span><span>{{eventdata.time}}</span>
 			</div>
 			<div>
-				<span>{{event.location}}Times Square</span>
+				<span>{{eventdata.location.name}}</span>
 			</div>
 		</div>
 		<div class="col-md-4">
-			<p>This is a test event description! These descriptions will be pretty long so I'm adding as much filler text as possible.</p>
+			<p>{{eventdata.description}}</p>
 		</div>
 		<div class="col-md-2">
-			<a class="btn btn-success">Join!</a>
+			<a class="btn btn-success" ui-sref="eventDetail({id: eventdata._id})">Join!</a>
 		</div>
 	</div>
 </div>
