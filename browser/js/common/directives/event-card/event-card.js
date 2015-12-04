@@ -1,10 +1,10 @@
-app.directive('eventDetail', function(Utils) {
+app.directive('eventCard', function(Utils) {
 	return {
 		restrict: 'E',
 		scope: {
 			eventdata: '='
 		},
-		templateUrl: '/js/common/directives/event-detail/event-detail.html', 
+		templateUrl: '/js/common/directives/event-card/event-card.html', 
 		link: function(scope, element, attrs){
 			var defaultImages = Utils.defaultImages;
 			scope.getImage = function() {

@@ -3,10 +3,17 @@ app.config(function($stateProvider){
        .state('eventList', {
            url:'/events',
            templateUrl: 'js/event/list.html',
-           controller: function($scope, uiGmapGoogleMapApi, EventFactory){
+           resolve: {
+            events: function(EventFactory) {
+              return EventFactory.getEvents();
+            }
+           }, 
+           controller: function($scope, uiGmapGoogleMapApi, Utils, events){
+               console.log(events);
+               $scope.events = events;
                $scope.map = { center: { latitude: 40.773959, longitude: -73.970949 }, zoom: 14 };
                uiGmapGoogleMapApi.then(function(maps) {});
-               $scope.sportsList = EventFactory.sportsList
+               $scope.sportsList = Utils.sportsList;
            }
        })
        .state('eventDetail', {

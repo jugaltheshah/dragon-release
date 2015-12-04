@@ -6,10 +6,12 @@ var mongoose =require('mongoose');
 var Event = require('../../../db/models/event.js')
 
 router.get('/', function(req, res, next){
+    console.log('Called! Getting Events!')
     Event
         .find()
-        .then(function(docs){
-            res.json(docs);
+        .then(function(events){
+            console.log(events);
+            res.json(events);
         })
         .then(null, next);
 });
