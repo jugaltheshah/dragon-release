@@ -30,12 +30,12 @@ moment().format();
 
 var getRandomLocation = function() { //change this later to take a sport and return a location that makes sense for the sport input.
     var locations = [
-    {name: 'Central Park', location: {latitude: 40.771606, longitude: -73.974819}},
-    {name: 'Chelsea Piers Sports Center', location: {latitude: 40.746617, longitude: -74.010184}},
-    {name: 'Hudson River Park', location: {latitude: 40.727127, longitude: -74.011334}},
-    {name: 'Central Park Great Lawn', location: {latitude: 40.781389, longitude: -73.966553}},
-    {name: 'Nelson Rockefeller Park', location: {latitude: 40.716920, longitude: -74.016867}},
-    {name: '"The Cage" W4 St Basketball Courts', location: {latitude: 40.731041, longitude: -74.001244}}, 
+    {name: 'Central Park', coords: {latitude: 40.771606, longitude: -73.974819}},
+    {name: 'Chelsea Piers Sports Center', coords: {latitude: 40.746617, longitude: -74.010184}},
+    {name: 'Hudson River Park', coords: {latitude: 40.727127, longitude: -74.011334}},
+    {name: 'Central Park Great Lawn', coords: {latitude: 40.781389, longitude: -73.966553}},
+    {name: 'Nelson Rockefeller Park', coords: {latitude: 40.716920, longitude: -74.016867}},
+    {name: '"The Cage" W4 St Basketball Courts', coords: {latitude: 40.731041, longitude: -74.001244}}, 
     ]
 
     return locations[Math.floor(Math.random()*locations.length)];
@@ -106,7 +106,7 @@ var seedEvents = function () {
         sport: 'Soccer',
         date: moment('MMM Do YYYY').toString(), 
         time: moment('3:30', 'h:mm A').toString(), 
-        location: {name: 'Central Park', location: {latitude: 40.771606, longitude: -73.974819}},
+        location: {name: 'Central Park', coords: {latitude: 40.771606, longitude: -73.974819}},
         tags: ['Soccer', 'Fun', 'Central Park', 'Easy'],
         level: 'Beginner (1-2)',
         minAttendees: 10,
@@ -120,7 +120,7 @@ var seedEvents = function () {
         sport: 'Basketball',
         date: moment('MMM Do YYYY').toString(), 
         time: moment('6:00', 'h:mm A').toString(),
-        location: {name: 'Chelsea Piers Sports Center', location: {latitude: 40.746617, longitude: -74.010184}},
+        location: {name: 'Chelsea Piers Sports Center', coords: {latitude: 40.746617, longitude: -74.010184}},
         tags: ['Basketball', 'Tournament', 'Chelsea Piers'],
         level: 'Intermediate (5-6)',
         fee: 25.00,
@@ -135,7 +135,7 @@ var seedEvents = function () {
         sport: 'Tennis', 
         date: moment('MMM Do YYYY').toString(), 
         time: moment('2:15', 'h:mm A').toString(),
-        location: {name: 'Hudson River Park Tennis Courts', location: {latitude: 40.727127, longitude: -74.011334}}, 
+        location: {name: 'Hudson River Park Tennis Courts', coords: {latitude: 40.727127, longitude: -74.011334}}, 
         tags: ['Tennis', 'Practice', 'Challenging', 'Match'],
         level: 'Pro (9-10)',
         minAttendees: 2,
