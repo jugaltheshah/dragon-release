@@ -19,17 +19,30 @@ app.config(function($stateProvider){
        .state('eventDetail', {
            url:'/events/detail/:id',
            templateUrl: 'js/event/detail.html',
-           controller: function($scope){
+           resolve: {
+              event: function(EventFactory, $stateParams){
+                  return EventFactory.getEventById($stateParams.id)
+                      .then(function(res){
+                          return res.data;
+                      })
+              }
+           },
+           controller: function($scope, event){
                $scope.page="detail";
-           }
+               console.log(event)
+               $scope.event = event;
+;           }
        })
        .state('eventCreate', {
            url:'/events/create',
            templateUrl: 'js/event/create.html',
-           controller: function($scope){
-               $scope.create = function(para) {
-                    alert(para);
-                };
+           controller: function($scope, EventFactory, $state){
+               $scope.createEvent = function() {
+                    EventFactory.createEvent($scope.event)
+                        .then(function(res){
+                            $state.go('eventDetail', {id: res.data._id});
+                        });
+               };
            }
        })
        .state('eventUpdate', {

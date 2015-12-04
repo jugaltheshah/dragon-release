@@ -1,15 +1,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-            <h4>Basketball Game</h4>
+            <h4>{{event.name}}</h4>
             <div class="row">
                 <div class="col-md-6">
                     <div class="well">
                         <div class="row">
                             <div class="col-md-2"><i class="fa fa-map-marker fa-3x"></i></div>
                             <div class="col-md-10">
-                                <p>Central Park</p>
-                                <p>231 dsdf klafjiwe NY 12313</p>
+                                <p>{{event.location}}</p>
+                                <!--<p>231 dsdf klafjiwe NY 12313</p>-->
                             </div>
                         </div>
                     </div>
@@ -17,8 +17,9 @@
                         <div class="row">
                             <div class="col-md-2"><i class="fa fa-calendar-check-o fa-3x"></i></div>
                             <div class="col-md-10">
-                                <p>Tuesday Nov. 17</p>
-                                <p>6:00am - 9:00pm</p>
+                                <p>{{event.timeBegin |date }}</p>
+                                <p>{{event.timeBegin }}</p>
+                                <p>{{event.timeEnd }}</p>
                             </div>
                         </div>
                     </div>
@@ -26,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-2"><i class="fa fa-usd fa-3x"></i></div>
                             <div class="col-md-7">
-                                <p>Free !</p>
+                                <p>{{feePerPerson || 'Free!'}}</p>
                             </div>
                             <div class="col-md-3">
                                 <a class="btn btn-danger">RSVP</a>
@@ -35,12 +36,10 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img class="img-responsive" src="http://northstarfamily.org/wp-content/uploads/2014/04/wildcats2.jpg">
+                    <img class="img-responsive" ng-src="http://northstarfamily.org/wp-content/uploads/2014/04/wildcats2.jpg">
                 </div>
             </div>
-            <div>
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </div>
+            <div ng-bind-html="event.description"></div>
         </div>
         <div class="col-md-3">
             <h3>Interested? Sport up?</h3>
