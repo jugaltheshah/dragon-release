@@ -1,0 +1,22 @@
+<h1>{{eventdata.sport}}</h1>
+<div class="row ">
+	<div class="col-md-2">
+		<a href="#">
+			<img class="img-responsive" style="width:100px; height:100px" src="{{getImage()}}">
+		</a>
+	</div>
+	<div class="col-md-4">
+		<h5>{{eventdata.name}}</h5>
+		<span>{{eventdata.host}}</span>
+		<div>
+			<span>{{eventdata.date}}</span><span>{{eventdata.time}}</span>
+		</div>
+		<div>
+			<span>{{eventdata.location.name}}</span>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<a class="btn btn-success" ui-sref="eventDetail({id: eventdata._id})">Check it Out</a>
+	</div>
+</div>
+	
