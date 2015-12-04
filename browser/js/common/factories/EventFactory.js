@@ -22,12 +22,21 @@ app.factory('EventFactory', function($http){
     function getEventById(id){
         return $http.get('/api/event/'+id);
     }
+
+    function getEvents() {
+        return $http.get('/api/events').then(function(res){
+            console.log(res);
+            return res.data;
+        });
+    }
+
 	return {
 		getUrl: function(type) {
 			return defaultImages[type];
 		},
         createEvent: createEvent,
         getEventById: getEventById,
+        getEvents: getEvents,
 		sportsList: sportsList
 	}
-})
+});
