@@ -1,4 +1,4 @@
-app.factory('EventFactory', function(){
+app.factory('EventFactory', function($http){
 	var defaultImages = {
 		basketball: 'http://designyoutrust.com/wp-content/uploads/2014/01/This_Game_We_Play_NYC_Basketball_Courts_by_Franck-_Bohbot_2014_03.jpg',
 		climbing: 'http://www.glappitnova.com/wp-content/uploads/2015/07/BKBChicago-South-Building-Climbing-Wall.jpg',
@@ -15,10 +15,19 @@ app.factory('EventFactory', function(){
 
 	var sportsList = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling", 'Tennis'];
 
+    function createEvent(event){
+        return $http.post('/api/event/', event);
+    }
+
+    function getEventById(id){
+        return $http.get('/api/event/'+id);
+    }
 	return {
 		getUrl: function(type) {
 			return defaultImages[type];
 		},
+        createEvent: createEvent,
+        getEventById: getEventById,
 		sportsList: sportsList
 	}
 })

@@ -8,10 +8,15 @@
     <link rel="stylesheet" type="text/css" href="/ng-tags-input/build/ng-tags-input.css" />
     <link rel="stylesheet" type="text/css" href="/textangular/dist/textAngular.css" />
     <link rel="stylesheet" type="text/css" href="/vendor/slide-and-push-menu/slide.and.push.css" />
+    <link rel="stylesheet" type="text/css" href="/vendor/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
     <script src="/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script src="/angular/angular.js"></script>
+    <script src="/moment/min/moment.min.js"></script>
+    <script src="/ng-autocomplete/src/ngAutocomplete.js"></script>
+    <script src="/vendor/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-bootstrap-npm/dist/angular-bootstrap.js"></script>
     <script src="/angular-bootstrap-npm/dist/angular-bootstrap-tpls.js"></script>
@@ -45,6 +50,7 @@
         <ul class="list-group">
             <li class="list-group-item"><a ui-sref="home">Home</a></li>
             <li class="list-group-item"><a ui-sref="eventList">Events</a></li>
+            <li class="list-group-item"><a ui-sref="eventCreate">Create Events</a></li>
             <li class="list-group-item"><a ui-sref="users">Players</a></li>
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
