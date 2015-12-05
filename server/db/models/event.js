@@ -5,13 +5,13 @@ var schema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true
-	}, 
+	},
 	sport: {
 		type: String,
 		required: true
 	},
 	host: {
-		type: String, 
+		type: String,
 		required: true
 	},
 	timeBegin: {
@@ -27,7 +27,7 @@ var schema = new mongoose.Schema({
 	},
 	tags: {
 		type: [String]
-	}, 
+	},
 	level: {
 		type: String
 	},
@@ -43,6 +43,7 @@ var schema = new mongoose.Schema({
 	image: {
 		type: String
 	},
+    attendees: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	video: {
 		type: String
 	},

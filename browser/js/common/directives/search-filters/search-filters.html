@@ -1,52 +1,52 @@
-<div style="border: dotted 1px">
-<form ng-submit="search()">
-	<div class="input-group">
-	  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
-	  <input type="text" class="form-control" placeholder="Search by Sport, Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<h4>Event Date</h4>
-			<div class="input-group">
-				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.current">
-				<label for="Happening_Now">Happening Now!</label>
-			</div>
-			<div class="input-group">
-				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.today">
-				<label for="Happening_Now">Happening Today</label>
-			</div>
-			<div class="input-group">
-				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.thisWeek">
-				<label for="Happening_Now">This Week</label>
-			</div>
+{{searchSettings}}
+<div class="row" ng-hide="toggleFilters()">
+	<div class="col-md-4">
+		<br>
+		<div class="input-group">
+		  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+		  <input type="text" class="form-control" placeholder="Search by Sport, Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">
 		</div>
-		<div class="col-md-4">
-			<h4>Event Location</h4>
-			<div class="input-group">
-				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.walking">
-				<label for="Happening_Now">Walking Distance (within 2 miles)</label>
-			</div>
-			<div class="input-group">
-				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.biking">
-				<label for="Happening_Now">Biking Distance (within 5 Miles)</label>
-			</div>
-			<div class="input-group">
-				<input for="Happening_Now" type="checkbox" ng-model="searchSettings.driving">
-				<label for="Happening_Now">Driving Distance (within 10 Miles)</label>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<h4> CALENDAR GOES HERE</h4>
-
-			<div class="dropdown" ng-model="searchSettings.sport">
+		<br>
+		{{sportList}}
+		<div class="dropdown" ng-model="searchSettings.sport">
 			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 			    Filter by Sport
 			    <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu">
-			    <li ng-repeat="sport in sportsList" value="{{sport}}">{{sport}}</li>
+			    <li ng-repeat="sport in sportsList">{{sport}}</li>
 			  </ul>
-			</div>
 		</div>
-</form>
+	</div>
+	<div class="col-md-4">
+		<h4>Distance</h4>
+		<div class="input-group">
+			<input for="Walking_Dist" type="radio" ng-model="searchSettings.walking">
+			<label for="Walking_Dist">Walking (2 mi)</label>
+		</div>
+		<div class="input-group">
+			<input for="Biking_Dist" type="radio" ng-model="searchSettings.biking">
+			<label for="Biking_Dist">Biking (5 mi)</label>
+		</div>
+		<div class="input-group">
+			<input for="Driving_Dist" type="checkbox" ng-model="searchSettings.driving">
+			<label for="Driving_Dist">Driving (10 mi)</label>
+		</div>
+		<h4>Event Date</h4>
+			<div class="input-group">
+				<input for="Happening_Today" type="checkbox" ng-model="searchSettings.today">
+				<label for="Happening_Today">Events Happening Today</label>
+			</div>
+			<div class="input-group">
+				<input for="Happening_This_Week" type="checkbox" ng-model="searchSettings.thisWeek">
+				<label for="Happening_This_Week">Events This Week</label>
+			</div>
+			<div class="input-group">
+				<input for="Happening_Two_Weeks" type="checkbox" ng-model="searchSettings.twoWeeks">
+				<label for="Happening_Two_Weeks">Events in Next Two Weeks</label>
+			</div>
+	</div>
+	<div class="col-md-4">
+		<datetimepicker ng-model="searchSettings.date"></datetimepicker>
+	</div>
 </div>

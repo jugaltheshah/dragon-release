@@ -49,6 +49,13 @@ body {
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
 
+.container-padding {
+  padding: 100px; }
+
+#userlist {
+  padding: 100px;
+  background-image: url("http://coolblackppt.com/wp-content/uploads/2013/06/High-resolution-background-patterns-damask-wallpaper-black.jpg"); }
+
 fullstack-logo {
   display: block; }
   fullstack-logo img {

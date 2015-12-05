@@ -35,7 +35,7 @@ var getRandomLocation = function() { //change this later to take a sport and ret
     {name: 'Hudson River Park', coords: {latitude: 40.727127, longitude: -74.011334}},
     {name: 'Central Park Great Lawn', coords: {latitude: 40.781389, longitude: -73.966553}},
     {name: 'Nelson Rockefeller Park', coords: {latitude: 40.716920, longitude: -74.016867}},
-    {name: '"The Cage" W4 St Basketball Courts', coords: {latitude: 40.731041, longitude: -74.001244}}, 
+    {name: '"The Cage" W4 St Basketball Courts', coords: {latitude: 40.731041, longitude: -74.001244}},
     ]
 
     return locations[Math.floor(Math.random()*locations.length)];
@@ -59,6 +59,7 @@ var genRandomEvents = function(num) {
             host: chance.first(),
             sport: getRandomSport(),
             timeBegin: moment(chance.date({string: true, year: 2015, month: 11})+'T'+chance.hour()+':'+chance.minute()+':00.000Z', 'h:mm A'),
+            timeEnd: moment(chance.date({string: true, year: 2015, month: 11})+'T'+chance.hour()+':'+chance.minute()+':00.000Z', 'h:mm A'),
             location: getRandomLocation(),
             level: getRandomLevel(),
             description: chance.paragraph({sentences: 1})
@@ -98,10 +99,11 @@ var seedEvents = function () {
     var events = genRandomEvents(12);
     var staticEvents = [
     {
-        name: 'The best soccer game ever', 
+        name: 'The best soccer game ever',
         host: 'bryce',
         sport: 'Soccer',
         timeBegin: '2015-12-08T14:30:00.000Z',
+        timeEnd: '2015-12-08T14:30:00.000Z',
         location: {name: 'Central Park', coords: {latitude: 40.771606, longitude: -73.974819}},
         tags: ['Soccer', 'Fun', 'Central Park', 'Easy'],
         level: 'Beginner (1-2)',
@@ -111,10 +113,11 @@ var seedEvents = function () {
         description: 'A soccer game for beginners. Not intense at all. Basically we\'ll just be kicking around a ball and having fun.'
     },
     {
-        name: 'Chelsea Piers Basketball Tournament', 
+        name: 'Chelsea Piers Basketball Tournament',
         host: 'mingjie',
         sport: 'Basketball',
         timeBegin: '2015-12-10T18:30:00.000Z',
+        timeEnd: '2015-12-08T14:30:00.000Z',
         location: {name: 'Chelsea Piers Sports Center', coords: {latitude: 40.746617, longitude: -74.010184}},
         tags: ['Basketball', 'Tournament', 'Chelsea Piers'],
         level: 'Intermediate (5-6)',
@@ -125,11 +128,12 @@ var seedEvents = function () {
         description: 'Basketball tournament at Chelsea Piers! Be good. No scrubs allowed. Teams randomly assigned. Winning team gets $100 each!'
     },
     {
-        name: 'Intense Tennis Match', 
+        name: 'Intense Tennis Match',
         host: 'jugal',
-        sport: 'Tennis', 
+        sport: 'Tennis',
         timeBegin: '2015-12-09T17:30:00.000Z',
-        location: {name: 'Hudson River Park Tennis Courts', coords: {latitude: 40.727127, longitude: -74.011334}}, 
+        timeEnd: '2015-12-08T14:30:00.000Z',
+        location: {name: 'Hudson River Park Tennis Courts', coords: {latitude: 40.727127, longitude: -74.011334}},
         tags: ['Tennis', 'Practice', 'Challenging', 'Match'],
         level: 'Pro (9-10)',
         minAttendees: 2,
@@ -148,8 +152,8 @@ var seedEvents = function () {
 
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
-        if (users.length === 0) {
-            return seedUsers();
+        if (users.length !== 0) {
+            //return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
             process.kill(0);
