@@ -5,36 +5,29 @@ var schema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true
-	},
+	}, 
 	sport: {
-    	type: String,
-    },
-	host: {
-		type: String,
-	},
-	date: {
 		type: String,
 		required: true
 	},
-	//time: {
-	//	type: String,
-	//	required: true
-	//},
-    feePerPerson: Number,
-    timeBegin: {
-        type: String,
-        required: true
-    },
-    timeEnd: {
-        type: String,
-        required: true
-    },
-	location: {
-		location: String
+	host: {
+		type: String, 
+		required: true
 	},
-	tags: [{
-        text: String
-    }],
+	timeBegin: {
+		type: String,
+		required: true
+	},
+	timeEnd: {
+		type: String
+	},
+	location: {
+		type: Object,
+		required: true
+	},
+	tags: {
+		type: [String]
+	}, 
 	level: {
 		type: String
 	},
