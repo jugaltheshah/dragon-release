@@ -7,7 +7,7 @@
 			</a>
 		</div>
 		<div class="col-md-4">
-			<h5>{{eventdata.name}}</h5>
+			<a href ui-sref="eventDetail({id: eventdata._id})"><h5>{{eventdata.name}}</h5></a>
 			<div>
 			<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif"><span>{{eventdata.host}}</span>
 			</div>
@@ -23,6 +23,7 @@
 		</div>
 		<div class="col-md-2">
 			<a class="btn btn-success" ui-sref="eventDetail({id: eventdata._id})">Join!</a>
+			<a class="btn btn-warning" ui-sref="eventUpdate({id: eventdata._id})">Edit</a>
 		</div>
 	</div>
 </div>
