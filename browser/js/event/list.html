@@ -2,8 +2,7 @@
     <div class="col-md-6" style="margin: 0; padding: 0">
         <ui-gmap-google-map center='map.center' zoom='map.zoom'>
         <ui-gmap-marker ng-repeat="event in events" coords="event.location.coords" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
-        	<ui-gmap-window isIconVisibleOnClick="true">
-        		<event-card eventdata="event"></event-card>
+        	<ui-gmap-window options="{content: ''}" isIconVisibleOnClick="true">
         	</ui-gmap-window>
         </ui-gmap-marker>
         </ui-gmap-google-map>
