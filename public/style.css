@@ -225,37 +225,6 @@ flippy.fancy flippy-back.flipped {
     display: inline-block;
     width: 30%; } }
 
-#about {
-  margin: 0 auto;
-  width: 90%; }
-  #about:after {
-    content: "";
-    display: table;
-    clear: both; }
-  #about p {
-    width: 40%;
-    margin: 0 auto;
-    text-align: justify;
-    font-size: 22px;
-    font-weight: 300;
-    float: left; }
-  #about .carousel {
-    float: right;
-    width: 55%;
-    overflow: hidden;
-    margin: 0 auto; }
-    #about .carousel .carousel-inner {
-      height: 500px !important; }
-    #about .carousel .carousel-control {
-      background: none; }
-    #about .carousel .carousel-indicators {
-      display: none; }
-    #about .carousel img {
-      max-width: 100%;
-      max-height: 500px;
-      display: block;
-      margin: 0 auto; }
-
 tutorial-section {
   display: block;
   width: 90%;
@@ -336,3 +305,14 @@ tutorial-section-menu {
     box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
   #auth-section #other-section #google-section {
     box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); }
+
+#players {
+  background: url(https://images.unsplash.com/photo-1416163119970-b823693d67e7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=dd3553be22c512ce664cfa154ff8c8e4);
+  background-size: cover; }
+
+#listUsersPage {
+  padding-top: 100px; }
+
+flippy.fancy flippy-front {
+  background: url(http://optimacy.org/wp-content/uploads/2012/07/online-profile.jpg);
+  background-size: cover; }
