@@ -3,18 +3,13 @@ app.directive('eventForm',function(){
 		restrict:'E',
 		templateUrl:'js/common/directives/event-form/event-form.html',
 		scope:{
-			event:"=",
-			fn:"&",
-			type:'@'
+			event:"="
 		},
 		controller:'eventFormCtrl'
 
 	};
 });
 
-
 app.controller('eventFormCtrl', function ($scope) {
-	console.log($scope.type);
-    $scope.event = {};
 
 });
