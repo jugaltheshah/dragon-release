@@ -7,7 +7,11 @@ app.directive('rotateText',
             scope.wordArr=['Ball', 'Swim', 'Goal', 'Tee', 'Tackle', 'Pull', 'Carve', 'Team', 'Lift', 'Climb', 'Belay', 'Cycle', 'Serve', 'Sport'];
 
             function updateWord(i) {
+                
                 var j=(i+1)%5; //(i+1) to start at second word
+                if (scope.wordArr[j] === 'Sport') {
+                    break;
+                }
                 //console.log(j);
                 element.text(scope.wordArr[j]);
             }

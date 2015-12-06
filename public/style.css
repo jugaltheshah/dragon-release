@@ -223,7 +223,7 @@ flippy.fancy flippy-back.flipped {
       font-weight: inherit; }
     #home #overlay .text-rotate {
       width: 200px;
-      font-family: Papyrus, fantasy;
+      font-family: Helvetica;
       font-weight: bold; }
   #home .btn-transparent {
     background-color: transparent;
