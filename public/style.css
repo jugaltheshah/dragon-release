@@ -2,11 +2,6 @@
   box-sizing: border-box; }
 
 body {
-  color: #c0c0c0;
-  background-color: #808080;
-  background-size: 100% 100%;
-  height: 100%;
-  width: 100%;
   font-family: Arial, Helvetica, sans-serif; }
 
 .whitea {
@@ -55,6 +50,14 @@ body {
 #userlist {
   padding: 100px;
   background-image: url("http://coolblackppt.com/wp-content/uploads/2013/06/High-resolution-background-patterns-damask-wallpaper-black.jpg"); }
+
+.fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
+  left: 7px; }
+
+.thumbnail-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 99%; }
 
 fullstack-logo {
   display: block; }
