@@ -58,8 +58,8 @@
             <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left">
                 <md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools" ui-sref="home">Sport Up</h1>
-                    <button ng-show="!user" class="md-raised md-warn md-button md-ink-ripple" type="button" ng-transclude="" ui-sref="login">
-                        <span>Login</span>
+                    <button ng-show="!user" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" type="button" ng-transclude="" ui-sref="login">
+                        <span style="color:white;">Login</span>
                     </button>
                 </md-toolbar>
                 <md-toolbar ng-show="user" class="md-tall md-hue-2">
@@ -68,9 +68,6 @@
                             <div flex="40">
                                 <img class="thumbnail-circle" src="icons/ming_portrait.jpg">
                             </div>
-                            <!--<div flex="60">-->
-                                <!--Dunkie King-->
-                            <!--</div>-->
                             <div>Hi, {{ user.facebook.displayName || user.email}}!</div>
                         </div>
                         <button class="md-warn md-raised md-hue-2 md-button md-ink-ripple" ng-click="logout()">Logout</button>
