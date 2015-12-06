@@ -2,7 +2,7 @@
 server/env/development.js
 node_modules
 npm-debug.log
-public/video
-public/main.js
+video
+public
 .DS_Store
 coverage
