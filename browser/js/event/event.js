@@ -104,12 +104,15 @@ app.config(function($stateProvider){
            templateUrl: 'js/event/create.html',
            controller: function($scope, EventFactory, $state, Utils){
                $scope.createEvent = function() {
-                    EventFactory.createEvent($scope.event)
-                        .then(function(res){
-                            $state.go('eventDetail', {id: res.data._id});
-                        });
+                    //EventFactory.createEvent($scope.event)
+                    //    .then(function(res){
+                    //        $state.go('eventDetail', {id: res.data._id});
+                    //    });
+                   console.log($scope.event);
                };
             $scope.sportsList = Utils.sportsList;
+               $scope.states = Utils.getStates();
+               console.log($scope.sportsList);
            }
        })
        .state('eventUpdate', {
