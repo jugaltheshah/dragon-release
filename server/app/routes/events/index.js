@@ -9,6 +9,8 @@ router.get('/', function(req, res, next){
     console.log('Called! Getting Events!')
     Event
         .find()
+        .populate('host', 'attendees')
+        .exec()
         .then(function(events){
             console.log(events);
             res.json(events);
@@ -54,6 +56,8 @@ router.delete('/:id', function(req, res, next){
 router.get('/:id', function(req, res, next){
     Event
         .findOne({_id: req.params.id})
+        .populate('host', 'attendees')
+        .exec()
         .then(function(doc){
             res.json(doc);
         })

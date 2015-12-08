@@ -58,7 +58,7 @@
             <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left">
                 <md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools" ui-sref="home">Sport Up</h1>
-                    <button ng-show="!user" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" type="button" ng-transclude="" ui-sref="login">
+                    <button ng-show="!user" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" type="button" ui-sref="login">
                         <span style="color:white;">Login</span>
                     </button>
                 </md-toolbar>
@@ -103,14 +103,11 @@
                 </md-content>
             </md-sidenav>
             <md-content flex layout-padding>
-                <md-fab-speed-dial md-direction="right" class="md-scale md-fab-top-left">
-                    <md-fab-trigger class="align-with-text"  ng-click="toggleLeft()">
-                        <md-button aria-label="menu" class="md-fab md-primary">
-                            <md-icon md-svg-src="icons/ic_menu_24px.svg"></md-icon>
-                        </md-button>
-                    </md-fab-trigger>
-                </md-fab-speed-dial>
-
+                <md-fab-trigger class="align-with-text" style="position:absolute;"  ng-click="toggleLeft()">
+                    <md-button aria-label="menu" class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/ic_menu_24px.svg"></md-icon>
+                    </md-button>
+                </md-fab-trigger>
                 <div ui-view></div>
                 <div flex></div>
             </md-content>

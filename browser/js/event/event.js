@@ -4,9 +4,9 @@ app.config(function($stateProvider){
            url:'/events',
            templateUrl: 'js/event/list.html',
            resolve: {
-            events: function(EventFactory) {
-              return EventFactory.getEvents();
-            }
+                events: function(EventFactory) {
+                  return EventFactory.getEvents();
+                }
            },
            controller: function($scope, uiGmapGoogleMapApi, Utils, events){
               console.log(navigator.geolocation);
@@ -62,6 +62,7 @@ app.config(function($stateProvider){
            },
            controller: function($scope, event, user, EventFactory, $state) {
                $scope.event = event;
+               console.log($scope.event);
                $scope.reserved = false;
                angular.forEach($scope.event.attendees, function (val, key) {
                    if (val === user._id) {
@@ -102,14 +103,30 @@ app.config(function($stateProvider){
        .state('eventCreate', {
            url:'/events/create',
            templateUrl: 'js/event/create.html',
-           controller: function($scope, EventFactory, $state, Utils){
+           resolve: {
+               user: function(AuthService){
+                   return AuthService.getLoggedInUser()
+                       .then(function(res){
+                           return res;
+                       })
+               }
+           },
+           controller: function($scope, EventFactory, $state, Utils, user){
                $scope.createEvent = function() {
-                    EventFactory.createEvent($scope.event)
+                    $scope.event.host = user;
+                    var addressString_pre = $scope.event.address1 + ', ' + $scope.event.city + ', ' + $scope.event.state;
+                    var addressString_post = addressString_pre.split(' ').join('+');
+                    Utils.getCoordinates(addressString_post)
+                        .then(function(res){
+                            $scope.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                            return EventFactory.createEvent($scope.event)
+                        })
                         .then(function(res){
                             $state.go('eventDetail', {id: res.data._id});
                         });
                };
-            $scope.sportsList = Utils.sportsList;
+               $scope.sportsList = Utils.sportsList;
+               $scope.states = Utils.getStates();
            }
        })
        .state('eventUpdate', {
@@ -121,16 +138,33 @@ app.config(function($stateProvider){
                        .then(function(res){
                            return res.data;
                        })
+               },
+               user: function(AuthService){
+                   return AuthService.getLoggedInUser()
+                       .then(function(res){
+                           return res;
+                       })
                }
            },
-           controller: function($scope, event, EventFactory, $state){
+           controller: function($scope, event, user, EventFactory, $state, Utils){
                $scope.event = event;
+               $scope.event.host = user;
+               $scope.event.date = new Date($scope.event.date);
                $scope.updateEvent = function() {
-                   EventFactory.updateEvent($scope.event)
+                   var addressString_pre = $scope.event.address1 + ', ' + $scope.event.city + ', ' + $scope.event.state;
+                   var addressString_post = addressString_pre.split(' ').join('+');
+                   console.log(addressString_post);
+                   Utils.getCoordinates(addressString_post)
+                       .then(function(res){
+                           $scope.event.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                           return EventFactory.updateEvent($scope.event)
+                       })
                        .then(function(res){
                            $state.go('eventDetail', {id: res.data._id});
                        });
                }
+               $scope.sportsList = Utils.sportsList;
+               $scope.states = Utils.getStates();
            }
        });
 });

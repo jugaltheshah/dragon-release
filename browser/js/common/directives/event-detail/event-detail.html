@@ -1,29 +1,51 @@
-<div style="border: dotted 1px">
-	<h1>{{eventdata.sport}}</h1>
-	<div class="row ">
-		<div class="col-md-2">
-			<a href="#">
-				<img class="img-responsive" style="width:100px; height:100px" src="{{getImage()}}">
-			</a>
-		</div>
-		<div class="col-md-4">
-			<a href ui-sref="eventDetail({id: eventdata._id})"><h5>{{eventdata.name}}</h5></a>
-			<div>
-			<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif"><span>{{eventdata.host}}</span>
-			</div>
-			<div>
-				<span>{{eventdata.date}}</span><span>{{eventdata.time}}</span>
-			</div>
-			<div>
-				<span>{{eventdata.location.name}}</span>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<p>{{eventdata.description}}</p>
-		</div>
-		<div class="col-md-2">
-			<a class="btn btn-success" ui-sref="eventDetail({id: eventdata._id})">Join!</a>
-			<a class="btn btn-warning" ui-sref="eventUpdate({id: eventdata._id})">Edit</a>
-		</div>
-	</div>
-</div>
+
+<md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start" >
+    <div flex="90" layout="column" >
+        <md-card  style="padding:30px;background-color:#F0F8FF;">
+            <md-card-title layout="row">
+                <md-card-title-text flex="60">
+                    <div class="md-headline" ui-sref="eventDetail({id: eventdata._id})"><a href>{{eventdata.name}}</a></div>
+                    <div class="md-subhead">{{eventdata.sport}}</div>
+                    <div class="md-subhead">{{eventdata.date | date : 'shortDate'}}</div>
+                </md-card-title-text>
+                <md-card-title-media  flex="40" class="pull-right">
+                    <div class="md-media-sm card-media">
+                        <img style="width:100px; height:100px"  src="{{getImage()}}">
+                    </div>
+                    <md-card-actions>
+                        <md-button class="md-accent md-raised md-hue-1" href ui-sref="eventDetail({id: eventdata._id})">See more</md-button>
+                    </md-card-actions>
+                </md-card-title-media>
+            </md-card-title>
+
+        </md-card>
+    </div>
+</md-content>
+<!--<h1>{{eventdata.sport}}</h1>-->
+<!--<div class="row ">-->
+    <!--<div class="col-md-2">-->
+        <!--<a href="#">-->
+            <!--<img class="img-responsive" style="width:100px; height:100px" src="{{getImage()}}">-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+        <!--<a href ui-sref="eventDetail({id: eventdata._id})"><h5>{{eventdata.name}}</h5></a>-->
+        <!--<div>-->
+            <!--<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif"><span>{{eventdata.host}}</span>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<span>{{eventdata.date}}</span><span>{{eventdata.time}}</span>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<span>{{eventdata.location.name}}</span>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+        <!--<p>{{eventdata.description}}</p>-->
+    <!--</div>-->
+    <!--<div class="col-md-2">-->
+        <!--<a class="btn btn-success" ui-sref="eventDetail({id: eventdata._id})">Join!</a>-->
+    <!--</div>-->
+<!--</div>-->
+
+

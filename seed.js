@@ -152,8 +152,8 @@ var seedEvents = function () {
 
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
-        if (users.length !== 0) {
-            //return seedUsers();
+        if (users.length === 0) {
+            return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
             process.kill(0);

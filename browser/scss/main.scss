@@ -88,10 +88,6 @@ body {
    background-image: url("http://coolblackppt.com/wp-content/uploads/2013/06/High-resolution-background-patterns-damask-wallpaper-black.jpg");
 }
 
-.fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
-  left: 7px; }
-
-
 .thumbnail-circle{
   width: 60px;
   height: 60px;
@@ -107,3 +103,4 @@ body {
 @import 'tutorial/main';
 @import 'login/main';
 @import 'players/main';
+@import 'event/main';

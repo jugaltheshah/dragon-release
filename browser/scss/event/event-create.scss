@@ -1,0 +1,28 @@
+
+    md-content {
+        md-tabs {
+            background: #f6f6f6;
+            border: 1px solid #e1e1e1;
+
+            md-tab-item{
+               &:hover{
+                  background-color: #808080;
+                  color: pink;
+               }
+            }
+            .md-active {
+               background-color: #808080;
+                color: pink;
+            }
+        }
+    }
+
+    .md-datepicker-calendar {
+      background-color: white;
+      .md-calendar-day-header {
+        background-color: white;
+      }
+      .md-calendar-scroll-mask {
+        background-color: white;
+      }
+    }

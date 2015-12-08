@@ -4,30 +4,28 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true
 	},
 	sport: {
 		type: String,
-		required: true
 	},
-	host: {
-		type: String,
-		required: true
-	},
+	host: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	timeBegin: {
 		type: String,
-		required: true
 	},
 	timeEnd: {
 		type: String
 	},
 	location: {
-		type: Object,
-		required: true
+		lat: Number,
+        lng: Number
 	},
-	tags: {
-		type: [String]
-	},
+    date: String,
+    address1:String,
+    address2: String,
+    city: String,
+    state: String,
+    zip: String,
+	tags: [{text: String}],
 	level: {
 		type: String
 	},

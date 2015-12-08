@@ -51,9 +51,6 @@ body {
   padding: 100px;
   background-image: url("http://coolblackppt.com/wp-content/uploads/2013/06/High-resolution-background-patterns-damask-wallpaper-black.jpg"); }
 
-.fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
-  left: 7px; }
-
 .thumbnail-circle {
   width: 60px;
   height: 60px;
@@ -326,3 +323,20 @@ tutorial-section-menu {
 flippy.fancy flippy-front {
   background: url(http://optimacy.org/wp-content/uploads/2012/07/online-profile.jpg);
   background-size: cover; }
+
+md-content md-tabs {
+  background: #f6f6f6;
+  border: 1px solid #e1e1e1; }
+  md-content md-tabs md-tab-item:hover {
+    background-color: #808080;
+    color: pink; }
+  md-content md-tabs .md-active {
+    background-color: #808080;
+    color: pink; }
+
+.md-datepicker-calendar {
+  background-color: white; }
+  .md-datepicker-calendar .md-calendar-day-header {
+    background-color: white; }
+  .md-datepicker-calendar .md-calendar-scroll-mask {
+    background-color: white; }
