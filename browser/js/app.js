@@ -118,8 +118,9 @@ app.controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $rootSco
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
         $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
-        $scope.toggleLeft = buildDelayedToggler('left');
+        //$scope.toggleLeft = buildDelayedToggler('left');
         $scope.toggleRight = buildToggler('right');
+        $scope.toggleLeft = buildToggler('left');
         $scope.isOpenRight = function(){
             return $mdSidenav('right').isOpen();
         };
@@ -148,7 +149,7 @@ app.controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $rootSco
                 $mdSidenav(navID)
                     .toggle()
                     .then(function () {
-                        $log.debug("toggle " + navID + " is done");
+                        $log.debug("2toggle " + navID + " is done");
                     });
             }, 200);
         }
@@ -157,7 +158,7 @@ app.controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $rootSco
                 $mdSidenav(navID)
                     .toggle()
                     .then(function () {
-                        $log.debug("toggle " + navID + " is done");
+                        $log.debug("1toggle " + navID + " is done");
                     });
             }
         }
@@ -166,7 +167,7 @@ app.controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $rootSco
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
-                    $log.debug("close LEFT is done");
+                    //$log.debug("close LEFT is done");
                 });
         };
     })
