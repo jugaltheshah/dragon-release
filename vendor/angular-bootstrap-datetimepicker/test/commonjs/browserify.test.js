@@ -18,7 +18,7 @@ tapeTest('can load module after requiring', function (t) {
   }
 
   t.throws(loadModule);
-  require('../../');
+  require('../../src/js/datetimepicker');
   t.doesNotThrow(loadModule);
   t.end();
 });

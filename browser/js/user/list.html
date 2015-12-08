@@ -1,25 +1,37 @@
-<div id="userlist">
-    <div class="container">
+<section id="players">
+    <div class="container" id="listUsersPage">
         <div class="row">
             <div class="col-md-3" ng-repeat="user in users">
-                <flippy
-                        class="fancy"
-                        ng-click="flip()"
-                        ng-mouseenter=""
-                        ng-mouseleave=""
-                        flip-duration="1000"
-                        timing-function="ease-in-out">
-
+                <flippy class="fancy" ng-click="flip()" ng-mouseenter="" ng-mouseleave="" flip-duration="1000" timing-function="ease-in-out">
                     <flippy-front>
                         <a ui-sref="userDetail({id: user._id})">{{ user.facebook.displayName || user.userName || user.email }}</a>
                     </flippy-front>
-
                     <flippy-back>
                         <div ng-bind-html="user.bio"></div>
                     </flippy-back>
                 </flippy>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br><br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
-
-</div>
+</section>

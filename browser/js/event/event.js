@@ -15,7 +15,7 @@ app.config(function($stateProvider){
                uiGmapGoogleMapApi.then(function(maps) {});
                $scope.sportsList = Utils.sportsList;
                $scope.selectedSport = 'Filter by Sport';
-               
+
                $scope.filterDistance = function(distance) {
                 $scope.events = events;
                 var filteredList = [];
@@ -23,9 +23,9 @@ app.config(function($stateProvider){
                     if ($scope.events[i].sport === sport) {
                       filteredList.push($scope.events[i]);
                     }
-                  } 
+                  }
                 $scope.events = filteredList;
-               }  
+               }
                $scope.filterSport = function(sport){
                 $scope.selectedSport = sport;
                 $scope.events = events;
@@ -34,8 +34,8 @@ app.config(function($stateProvider){
                     if ($scope.events[i].sport === sport) {
                       filteredList.push($scope.events[i]);
                     }
-                  } 
-                $scope.events = filteredList; 
+                  }
+                $scope.events = filteredList;
                }
 
                $scope.filterDistance = function(distance) {
@@ -102,7 +102,7 @@ app.config(function($stateProvider){
        .state('eventCreate', {
            url:'/events/create',
            templateUrl: 'js/event/create.html',
-           controller: function($scope, EventFactory, $state){
+           controller: function($scope, EventFactory, $state, Utils){
                $scope.createEvent = function() {
                     EventFactory.createEvent($scope.event)
                         .then(function(res){
