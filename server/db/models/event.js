@@ -4,37 +4,28 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true
 	},
 	sport: {
-    	type: String,
-    },
-	host: {
 		type: String,
 	},
-	date: {
+	host: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	timeBegin: {
 		type: String,
-		required: true
 	},
-	//time: {
-	//	type: String,
-	//	required: true
-	//},
-    feePerPerson: Number,
-    timeBegin: {
-        type: String,
-        required: true
-    },
-    timeEnd: {
-        type: String,
-        required: true
-    },
+	timeEnd: {
+		type: String
+	},
 	location: {
-		location: String
+		lat: Number,
+        lng: Number
 	},
-	tags: [{
-        text: String
-    }],
+    date: String,
+    address1:String,
+    address2: String,
+    city: String,
+    state: String,
+    zip: String,
+	tags: [{text: String}],
 	level: {
 		type: String
 	},
@@ -50,6 +41,7 @@ var schema = new mongoose.Schema({
 	image: {
 		type: String
 	},
+    attendees: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	video: {
 		type: String
 	},

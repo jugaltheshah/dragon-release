@@ -1,21 +1,114 @@
-<div class="row-fluid" style="margin-bottom: 0">
-    <div class="col-md-6" style="margin: 0; padding: 0">
+<div layout="row">
+
+    <div id="map-container" flex="70">
         <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-        <ui-gmap-marker ng-repeat="event in events" coords="event.location.coords" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
-        	<ui-gmap-window isIconVisibleOnClick="true">
-        		<event-card eventdata="event"></event-card>
-        	</ui-gmap-window>
-        </ui-gmap-marker>
+            <ui-gmap-marker ng-repeat="event in events" coords="event.location.coords" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
+                <ui-gmap-window options="{content: ''}" isIconVisibleOnClick="true">
+                </ui-gmap-window>
+            </ui-gmap-marker>
         </ui-gmap-google-map>
     </div>
-	<div class="col-md-6" style="margin: 0; padding: 0">
-	     <div class="well" style="background-color: #404040">
-	        <search-filters></search-filters>
-	        <div id="eventsList" style="overflow-y: scroll; height: 690px">
-		        <div ng-repeat="event in events">
-		        	<event-detail eventdata="event"></event-detail>
-		        </div>
-	        </div>
-	    </div>
-    </div>
+    <div flex="30">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search by Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">
+        </div>
+            <div layout="row">
+                <div flex="30">
+                    <h4>Find Events Near Me:</h4>
+                    <md-content>
+                        <md-input-container>
+                            <md-radio-group ng-model="filter.distance">
+                                <md-radio-button value="walking" ng-click="filterDistance('walking')" >Walking (2 mi.)</md-radio-button>
+                                <md-radio-button value="biking" ng-click="filterDistance('biking')" >Biking (5 mi.)</md-radio-button>
+                                <md-radio-button value="driving" ng-click="filterDistance('driving')">Driving (10 mi.)</md-radio-button>
+                            </md-radio-group>
+                        </md-input-container>
+                    </md-content>
+                </div>
+                <div flex="30">
+                    <h4>Find Events by Date:</h4>
+                    <md-content>
+                        <md-input-container>
+                            <md-radio-group ng-model="filter.durance">
+                                <md-radio-button value="Today" ng-click="filterDistance('walking')" >Events Today</md-radio-button>
+                                <md-radio-button value="This Week" ng-click="filterDistance('biking')" >Events This Week</md-radio-button>
+                                <md-radio-button value="Next Week" ng-click="filterDistance('driving')">Events Next Week</md-radio-button>
+                            </md-radio-group>
+                        </md-input-container>
+                    </md-content>
+                </div>
+                <div flex="40">
+                    <!--<datetimepicker ng-model="searchSettings.date"></datetimepicker>-->
+                <md-datepicker ng-model="searchSettings.date" md-placeholder="Enter date"></md-datepicker>
+                    <md-input-container style="margin-right: 10px;">
+                        <label>Filter By Sport</label>
+                        <md-select ng-model="searchSettings.sport">
+                            <md-option ng-repeat="sport in sportsList" value="{{sport}}" ng-click='filterSport(sport)'>{{sport}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div id="eventsList">
+                <div ng-repeat="event in events">
+                    <event-detail eventdata="event"></event-detail>
+                </div>
+            </div>
 </div>
+<!--<div class="row-fluid" style="margin-bottom: 0">-->
+    <!--<div class="col-md-6" style="margin: 0; padding: 0">-->
+        <!--<ui-gmap-google-map center='map.center' zoom='map.zoom'>-->
+        <!--<ui-gmap-marker ng-repeat="event in events" coords="event.location.coords" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">-->
+        	<!--<ui-gmap-window options="{content: ''}" isIconVisibleOnClick="true">-->
+        	<!--</ui-gmap-window>-->
+        <!--</ui-gmap-marker>-->
+        <!--</ui-gmap-google-map>-->
+    <!--</div>-->
+	<!--<div class="col-md-6" style="margin: 0; padding: 0">-->
+	     <!--<div class="well" style="background-color: #404040">-->
+	     <!--{{searchSettings}}-->
+			<!--<div class="row" ng-hide="toggleFilters()">-->
+				<!--<div class="input-group">-->
+					  <!--<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>-->
+					  <!--<input type="text" class="form-control" placeholder="Search by Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">-->
+					<!--</div>-->
+				<!--<div class="col-md-4">-->
+				    <!--<h4>Find Events Near Me:</h4>-->
+						<!--<div><label class="btn btn-primary" ng-click="filterDistance('walking')">Walking (2 mi.)</label>-->
+				        <!--</div>-->
+				        <!--<div><label class="btn btn-primary" ng-click="filterDistance('biking')">Biking (5 mi.)</label>-->
+				        <!--</div>-->
+				        <!--<div><label class="btn btn-primary" ng-click="filterDistance('driving')">Driving (10 mi.)</label>-->
+				        <!--</div>-->
+				    <!--<br>-->
+				    <!--<br>-->
+				    <!--<div class="btn-group" uib-dropdown is-open="status.isopen" ng-model="searchSettings.sport">-->
+				      <!--<button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>{{selectedSport}}-->
+				  	  <!--<span class="caret"></span>-->
+				      <!--</button>-->
+				      <!--<ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">-->
+				        <!--<li ng-repeat='sport in sportsList'><a href ng-click='filterSport(sport)'>{{sport}}</a></li>-->
+				      <!--</ul>-->
+				    <!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-3">-->
+					<!--<h4>Find Events by Date:</h4>-->
+						<!--<div><label class="btn btn-primary" ng-model="searchSettings.today" uib-btn-checkbox="Today" ng-click='updateResults(searchSettings)'>Events Today</label>-->
+				        <!--</div>-->
+				        <!--<div><label class="btn btn-primary" ng-model="searchSettings.thisWeek" uib-btn-checkbox="This Week">Events This Week</label>-->
+				        <!--</div>-->
+				        <!--<div><label class="btn btn-primary" ng-model="searchSettings.nextWeek" uib-btn-checkbox="Next Week">Events Next Week</label>-->
+				        <!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-5">-->
+					<!--<datetimepicker ng-model="searchSettings.date"></datetimepicker>-->
+				<!--</div>-->
+			<!--</div>-->
+        <!--<div id="eventsList" style="overflow-y: scroll; height: 690px">-->
+	        <!--<div ng-repeat="event in events">-->
+	        	<!--<event-detail eventdata="event"></event-detail>-->
+	        <!--</div>-->
+        <!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->

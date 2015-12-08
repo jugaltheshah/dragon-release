@@ -6,6 +6,7 @@ app.directive('eventCard', function(Utils) {
 		},
 		templateUrl: '/js/common/directives/event-card/event-card.html', 
 		link: function(scope, element, attrs){
+		console.log(scope.eventdata);
 			var defaultImages = Utils.defaultImages;
 			scope.getImage = function() {
 				// type = type.toLowerCase();

@@ -1,86 +1,174 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <h4>{{event.name}}</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-2"><i class="fa fa-map-marker fa-3x"></i></div>
-                            <div class="col-md-10">
-                                <p>{{event.location}}</p>
-                                <!--<p>231 dsdf klafjiwe NY 12313</p>-->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-2"><i class="fa fa-calendar-check-o fa-3x"></i></div>
-                            <div class="col-md-10">
-                                <p>{{event.timeBegin |date }}</p>
-                                <p>{{event.timeBegin }}</p>
-                                <p>{{event.timeEnd }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-2"><i class="fa fa-usd fa-3x"></i></div>
-                            <div class="col-md-7">
-                                <p>{{feePerPerson || 'Free!'}}</p>
-                            </div>
-                            <div class="col-md-3">
-                                <a class="btn btn-danger">RSVP</a>
-                            </div>
-                        </div>
-                    </div>
+    <div layout="row">
+        <div flex="70">
+            <h2 class="md-display-1">{{event.name}}</h2>
+            <div layout="column">
+                <div flex="25">
+                    <md-button class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/location.svg"></md-icon>
+                    </md-button>
+                    <span>{{event.address1}}</span>
+                    <span>{{event.address2}}</span>
+                    <span>{{event.city}}</span>
+                    <span>{{event.state}}</span>
+                    <span>{{event.zip}}</span>
                 </div>
-                <div class="col-md-6">
-                    <img class="img-responsive" ng-src="http://northstarfamily.org/wp-content/uploads/2014/04/wildcats2.jpg">
+                <div flex="25">
+                    <md-button class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/calendar.svg"></md-icon>
+                    </md-button>
+                    <span>{{event.date|date:'shortDate'}}</span>
+                </div>
+                <div flex="25">
+                    <md-button class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/currency-dollar.svg"></md-icon>
+                    </md-button>
+                    <span>{{event.fee || 'Free!'}}</span>
+                </div>
+                <div flex="25">
+                    <md-button ng-show="!reserved" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" ng-click="join()">
+                        <span>RSVP</span>
+                    </md-button>
+                    <md-button ng-show="reserved" class="md-raised md-warn md-button md-ink-ripple" ng-click="cancel()">
+                        <span>Cancel</span>
+                    </md-button>
                 </div>
             </div>
-            <div ng-bind-html="event.description"></div>
+            <br >
+            <br >
+            <br >
+            <div layout="column">
+                <div flex="80">
+                    <div ng-bind-html="event.description"></div>
+                </div>
+            </div>
+            <div layout="column">
+
+            </div>
         </div>
-        <div class="col-md-3">
-            <h3>Interested? Sport up?</h3>
-            <a style="margin-bottom:40px;" class="btn btn-warning">Join</a>
-            <div style="margin-bottom:50px;" class="row">
-                <div class="col-md-6">
-                    <i class="fa fa-users fa-2x"></i>
-                    <a class="label label-success">8 seats</a>
+        <div flex="30">
+            <md-content>
+                <div layout="row">
+                    <div flex="70">
+                        <h4>Interested? Sport up?</h4>
+                    </div>
+                    <div flex="30">
+                        <md-button class="md-fab md-primary">Join</md-button>
+                    </div>
                 </div>
+            </md-content>
+            <md-divider ></md-divider>
+            <md-content style="margin-bottom:50px;" class="row">
+
                 <div class="col-md-6">
-                    <i class="fa fa-users fa-2x"></i>
-                    <a class="label label-info">5 going</a>
+                    <md-button class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/people_icon1.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-accent md-button md-ink-ripple">{{event.attendees.length}} going</md-button>
                 </div>
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
-            <div style="margin-bottom:20px;">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-            </div>
+            </md-content>
+            <md-divider ></md-divider>
+            <md-content>
+                <button class="md-raised md-button md-ink-ripple" type="button" style="margin-left:0; margin-right:0;"><span>Host</span><div class="md-ripple-container"></div></button>
+                <div>{{event.host.userName || 'John Doe'}}</div>
+                <img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif">
+            </md-content>
+            <md-divider ></md-divider>
+            <md-content>
+                <md-list>
+                    <md-subheader class="md-no-sticky">
+                        <button class="md-raised md-button md-ink-ripple" type="button" style="margin-left:0; margin-right:0;">
+                            <span>Players</span><div class="md-ripple-container"></div>
+                        </button>
+                    </md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="attendee in event.attendees">
+                        <img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ attendee.userName }}</h3>
+                            <h4>{{ attendee.email }}</h4>{{attendee}}
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
         </div>
     </div>
 </div>
+
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-9">-->
+            <!--<h4>{{event.name}}</h4>-->
+            <!--<a class="btn btn-warning" ui-sref="eventUpdate({id: event._id})">Edit</a>-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-6">-->
+                    <!--<div class="well">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-2"><i class="fa fa-map-marker fa-3x"></i></div>-->
+                            <!--<div class="col-md-10">-->
+                                <!--<p>{{event.location.name}}</p>-->
+                                <!--<p>{{event.location.address}}</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="well">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-2"><i class="fa fa-calendar-check-o fa-3x"></i></div>-->
+                            <!--<div class="col-md-10">-->
+                                <!--<p>{{event.timeBegin | timestamp | date:'longDate'}}</p>-->
+                                <!--<p>{{event.timeBegin | timestamp | date:'shortTime' }}</p>-->
+                                <!--<p>{{event.timeEnd | timestamp | date:'shortTime'  }}</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="well">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-2"><i class="fa fa-usd fa-3x"></i></div>-->
+                            <!--<div class="col-md-7">-->
+                                <!--<p>{{feePerPerson || 'Free!'}}</p>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-3">-->
+                                <!--<a ng-show="!reserved" class="btn btn-success" ng-click="join()">RSVP</a>-->
+                                <!--<a ng-show="reserved" class="btn btn-danger" ng-click="cancel()">Cancel</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                    <!--<img class="img-responsive" ng-src="http://northstarfamily.org/wp-content/uploads/2014/04/wildcats2.jpg">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div ng-bind-html="event.description"></div>-->
+        <!--</div>-->
+        <!--<div class="col-md-3">-->
+            <!--<h3>Interested? Sport up?</h3>-->
+            <!--<a style="margin-bottom:40px;" class="btn btn-warning">Join</a>-->
+            <!--<div style="margin-bottom:50px;" class="row">-->
+                <!--<div class="col-md-6">-->
+                    <!--<i class="fa fa-users fa-2x"></i>-->
+                    <!--<a class="label label-success">{{event.maxAttendees - event.attendees.length}} seats</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                    <!--<i class="fa fa-users fa-2x"></i>-->
+                    <!--<a class="label label-info">{{event.attendees.length}} going</a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<label>Host</label>-->
+                <!--<span>{{event.host}}</span>-->
+                <!--<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif">-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<label>Players</label>-->
+                <!--<div ng-show="event.attendees.length === 0" class="alert alert-warning">-->
+                    <!--No Player Yet! 囧-->
+                <!--</div>-->
+                <!--<ul ng-show="event.attendees.length > 0" class="list-group">-->
+                    <!--<li style="margin-bottom:20px;" ng-repeat="attendee in event.attendees">-->
+                        <!--<span>{{attentee.userName}}</span>-->
+                        <!--<img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif">-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

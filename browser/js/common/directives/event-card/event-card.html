@@ -6,7 +6,7 @@
 		</a>
 	</div>
 	<div class="col-md-4">
-		<h5>{{eventdata.name}}</h5>
+		<h5><a ui-sref="eventDetail({id: eventdata._id})">{{eventdata.name}}</a></h5>
 		<span>{{eventdata.host}}</span>
 		<div>
 			<span>{{eventdata.date}}</span><span>{{eventdata.time}}</span>
@@ -19,4 +19,3 @@
 		<a class="btn btn-success" ui-sref="eventDetail({id: eventdata._id})">Check it Out</a>
 	</div>
 </div>
-	

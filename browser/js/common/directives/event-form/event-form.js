@@ -10,6 +10,6 @@ app.directive('eventForm',function(){
 	};
 });
 
-app.controller('eventFormCtrl', function ($scope) {
-
+app.controller('eventFormCtrl', function ($scope, Utils) {
+    $scope.sportsList = Utils.sportsList;
 });

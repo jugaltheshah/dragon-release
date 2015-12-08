@@ -1,64 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <base href="/" />
-    <title>upSport</title>
-    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="/ng-tags-input/build/ng-tags-input.css" />
-    <link rel="stylesheet" type="text/css" href="/textangular/dist/textAngular.css" />
-    <link rel="stylesheet" type="text/css" href="/vendor/slide-and-push-menu/slide.and.push.css" />
-    <link rel="stylesheet" type="text/css" href="/vendor/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-    <script src="/lodash/index.js"></script>
-    <script src="/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-    <script src="/angular/angular.js"></script>
-    <script src="/moment/min/moment.min.js"></script>
-    <script src="/ng-autocomplete/src/ngAutocomplete.js"></script>
-    <script src="/vendor/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
-    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/angular-bootstrap-npm/dist/angular-bootstrap.js"></script>
-    <script src="/angular-bootstrap-npm/dist/angular-bootstrap-tpls.js"></script>
-    <script src="/ng-tags-input/build/ng-tags-input.js"></script>
-    <script src="/socket.io-client/socket.io.js"></script>
-    <script src='/angular-google-maps/dist/angular-google-maps.js'></script>
-    <script src='/angular-animate/angular-animate.js'></script>
-    <script src='/ng-file-upload/dist/ng-file-upload-shim.js'></script>
-    <script src='/ng-file-upload/dist/ng-file-upload.js'></script>
-    <script src='/angular-simple-logger/dist/angular-simple-logger.js'></script>
-    <script src='/textangular/dist/textAngular-rangy.min.js'></script>
-    <script src='/textangular/dist/textAngular-sanitize.min.js'></script>
-    <script src='/textangular/dist/textAngular.min.js'></script>
-    <script src='/vendor/slide-and-push-menu/slide.and.push.js'></script>
-    <script src="/main.js"></script>
-    <script>
-    var socket = io('http://localhost:1337');
-    socket.on('connected', function(data){
-        console.log(data.message);
-    });
-    </script>
-    <style type="text/css">
-     .angular-google-map-container { height: 1000px; }
-   </style>
-</head>
-<body ng-app="FullstackGeneratedApp" ng-controller="mainCtrl">
-<!--<navbar></navbar>-->
-    <div ui-view></div>
-    <button ng-push-menu="menu" id="menu-button"><i class="fa fa-bars fa-lg"></i></button>
-    <ng-slide-push-menu id="menu" position="left" fix-left="30px" spm-class="spmclass">
-        <ul class="list-group">
-            <li class="list-group-item"><a ui-sref="home">Home</a></li>
-            <li class="list-group-item"><a ui-sref="eventList">Events</a></li>
-            <li class="list-group-item"><a ui-sref="eventCreate">Create Events</a></li>
-            <li class="list-group-item"><a ui-sref="users">Players</a></li>
-        </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.facebook.displayName || user.email}}!</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
-    </ng-slide-push-menu>
-</body>
+    <head>
+        <base href="/" />
+        <title>sportUP</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+        <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="/ng-tags-input/build/ng-tags-input.css" />
+        <link rel="stylesheet" type="text/css" href="/textangular/dist/textAngular.css" />
+        <link rel="stylesheet" type="text/css" href="/slide-and-push-menu/slide.and.push.css" />
+        <link rel="stylesheet" type="text/css" href="/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
+        <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css">
+        <link rel="stylesheet" type="text/css" href="/angular-material-icons/angular-material-icons.css">
+        <link rel="stylesheet" type="text/css" href="/style.css" />
+        <script src="/lodash/index.js"></script>
+        <script src="/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+        <script src="/angular/angular.js"></script>
+        <script src="/moment/min/moment.min.js"></script>
+        <script src="/ng-autocomplete/src/ngAutocomplete.js"></script>
+        <script src="/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+        <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/angular-bootstrap-npm/dist/angular-bootstrap.js"></script>
+        <script src="/angular-bootstrap-npm/dist/angular-bootstrap-tpls.js"></script>
+        <script src="/ng-tags-input/build/ng-tags-input.js"></script>
+        <script src="/socket.io-client/socket.io.js"></script>
+        <script src='/angular-google-maps/dist/angular-google-maps.js'></script>
+        <script src='/angular-animate/angular-animate.js'></script>
+        <script src='/ng-file-upload/dist/ng-file-upload-shim.js'></script>
+        <script src='/ng-file-upload/dist/ng-file-upload.js'></script>
+        <script src='/angular-simple-logger/dist/angular-simple-logger.js'></script>
+        <script src='/textangular/dist/textAngular-rangy.min.js'></script>
+        <script src='/textangular/dist/textAngular-sanitize.min.js'></script>
+        <script src='/textangular/dist/textAngular.min.js'></script>
+        <script src='/slide-and-push-menu/slide.and.push.js'></script>
+
+        <script src="/angular-aria/angular-aria.js"></script>
+        <script src="/angular-animate/angular-animate.js"></script>
+        <script src="/angular-material/angular-material.js"></script>
+        <script src="/angular-material-icons/angular-material-icons.js"></script>
+
+        <script src="/main.js"></script>
+        <script>
+        var socket = io('http://localhost:1337');
+        socket.on('connected', function(data){
+            console.log(data.message);
+        });
+        </script>
+        <style type="text/css">
+         .angular-google-map-container { height: 1000px; }
+       </style>
+    </head>
+    <body ng-app="FullstackGeneratedApp" ng-controller="AppCtrl">
+    <!--<navbar></navbar>-->
+    <section layout="row" flex="">
+            <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left">
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools" ui-sref="home">Sport Up</h1>
+                    <button ng-show="!user" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" type="button" ui-sref="login">
+                        <span style="color:white;">Login</span>
+                    </button>
+                </md-toolbar>
+                <md-toolbar ng-show="user" class="md-tall md-hue-2">
+                    <div  layout="column" class="md-toolbar-tools-bottom inset">
+                        <div layout="row">
+                            <div flex="40">
+                                <img class="thumbnail-circle" src="icons/ming_portrait.jpg">
+                            </div>
+                            <div>Hi, {{ user.facebook.displayName || user.email}}!</div>
+                        </div>
+                        <button class="md-warn md-raised md-hue-2 md-button md-ink-ripple" ng-click="logout()">Logout</button>
+                    </div>
+                </md-toolbar>
+                <md-content layout-padding="" ng-controller="LeftCtrl">
+                   <md-list>
+                       <md-list-item>
+                           <md-button class="md-fab md-primary" ui-sref="home">
+                               <md-icon md-svg-src="icons/home-1.svg"></md-icon>
+                           </md-button>
+                           <md-button ui-sref="home">Home</md-button>
+                       </md-list-item>
+                       <md-list-item>
+                           <md-button class="md-fab md-primary" ui-sref="eventList">
+                               <md-icon md-svg-src="icons/sport.svg"></md-icon>
+                           </md-button>
+                           <md-button ui-sref="eventList">Find Events</md-button>
+                       </md-list-item>
+                       <md-list-item>
+                           <md-button class="md-fab md-primary" ui-sref="eventCreate">
+                               <md-icon md-svg-src="icons/edit.svg"></md-icon>
+                           </md-button>
+                           <md-button ui-sref="eventCreate">Create A Event</md-button>
+                       </md-list-item>
+                       <md-list-item>
+                           <md-button class="md-fab md-primary" ui-sref="users">
+                               <md-icon md-svg-src="icons/people_icon1.svg"></md-icon>
+                           </md-button>
+                           <md-button ui-sref="users">Find Players</md-button>
+                       </md-list-item>
+                   </md-list>
+                </md-content>
+            </md-sidenav>
+            <md-content flex layout-padding>
+                <md-fab-trigger class="align-with-text" style="position:absolute;"  ng-click="toggleLeft()">
+                    <md-button aria-label="menu" class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/ic_menu_24px.svg"></md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <div ui-view></div>
+                <div flex></div>
+            </md-content>
+    </section>
+
+
+    <!--<div ui-view></div>-->
+    <!--<button ng-push-menu="menu" id="menu-button"><i class="fa fa-bars fa-lg"></i></button>-->
+    <!--<ng-slide-push-menu id="menu" position="left" fix-left="30px" spm-class="spmclass">-->
+        <!--<ul class="list-group">-->
+            <!--<li class="list-group-item"><a ui-sref="home">Home</a></li>-->
+            <!--<li class="list-group-item"><a ui-sref="eventList">Find an Event</a></li>-->
+            <!--<li class="list-group-item"><a ui-sref="eventCreate">Create An Event</a></li>-->
+            <!--<li class="list-group-item"><a ui-sref="users">Players</a></li>-->
+        <!--</ul>-->
+
+    <!--</ng-slide-push-menu>-->
+    </body>
 </html>
 

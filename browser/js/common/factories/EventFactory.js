@@ -16,19 +16,24 @@ app.factory('EventFactory', function($http){
 	var sportsList = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling", 'Tennis'];
 
     function createEvent(event){
-        return $http.post('/api/event/', event);
+        return $http.post('/api/events/', event);
+    }
+
+    function updateEvent(event){
+        return $http.put('/api/events/', event);
     }
 
     function getEventById(id){
-        return $http.get('/api/event/'+id);
+        return $http.get('/api/events/'+id);
     }
 
     function getEvents() {
         return $http.get('/api/events').then(function(res){
-            console.log(res);
             return res.data;
         });
     }
+
+
 
 	return {
 		getUrl: function(type) {
@@ -37,6 +42,7 @@ app.factory('EventFactory', function($http){
         createEvent: createEvent,
         getEventById: getEventById,
         getEvents: getEvents,
+        updateEvent: updateEvent,
 		sportsList: sportsList
 	}
 });
