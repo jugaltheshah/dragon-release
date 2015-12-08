@@ -1,6 +1,6 @@
 <div layout="row">
 
-    <div id="map-container" flex="60">
+    <div id="map-container" flex="70">
         <ui-gmap-google-map center='map.center' zoom='map.zoom'>
             <ui-gmap-marker ng-repeat="event in events" coords="event.location.coords" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
                 <ui-gmap-window options="{content: ''}" isIconVisibleOnClick="true">
@@ -8,7 +8,7 @@
             </ui-gmap-marker>
         </ui-gmap-google-map>
     </div>
-    <div flex="40">
+    <div flex="30">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
             <input type="text" class="form-control" placeholder="Search by Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">
