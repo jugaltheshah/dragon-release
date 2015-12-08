@@ -16,7 +16,8 @@ var schema = new mongoose.Schema({
 		type: String
 	},
 	location: {
-		type: Object,
+		lat: Number,
+        lng: Number
 	},
     date: String,
     address1:String,

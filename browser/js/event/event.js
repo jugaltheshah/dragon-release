@@ -114,11 +114,16 @@ app.config(function($stateProvider){
            controller: function($scope, EventFactory, $state, Utils, user){
                $scope.createEvent = function() {
                     $scope.event.host = user;
-                    EventFactory.createEvent($scope.event)
+                    var addressString_pre = $scope.event.address1 + ', ' + $scope.event.city + ', ' + $scope.event.state;
+                    var addressString_post = addressString_pre.split(' ').join('+');
+                    Utils.getCoordinates(addressString_post)
+                        .then(function(res){
+                            $scope.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                            return EventFactory.createEvent($scope.event)
+                        })
                         .then(function(res){
                             $state.go('eventDetail', {id: res.data._id});
                         });
-                   console.log($scope.event);
                };
                $scope.sportsList = Utils.sportsList;
                $scope.states = Utils.getStates();
@@ -146,7 +151,14 @@ app.config(function($stateProvider){
                $scope.event.host = user;
                $scope.event.date = new Date($scope.event.date);
                $scope.updateEvent = function() {
-                   EventFactory.updateEvent($scope.event)
+                   var addressString_pre = $scope.event.address1 + ', ' + $scope.event.city + ', ' + $scope.event.state;
+                   var addressString_post = addressString_pre.split(' ').join('+');
+                   console.log(addressString_post);
+                   Utils.getCoordinates(addressString_post)
+                       .then(function(res){
+                           $scope.event.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                           return EventFactory.updateEvent($scope.event)
+                       })
                        .then(function(res){
                            $state.go('eventDetail', {id: res.data._id});
                        });

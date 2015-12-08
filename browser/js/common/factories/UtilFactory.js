@@ -1,4 +1,4 @@
-app.factory('Utils', function(){
+app.factory('Utils', function($http){
 
     var state_hash =  [
         {
@@ -259,9 +259,15 @@ app.factory('Utils', function(){
 
     var sportsList = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling", 'Tennis'];
 
+    function getCoordinates(address){
+        var url = 'http://maps.google.com/maps/api/geocode/json?address='+address+'&sensor=false';
+        return $http.get(url);
+    }
+
     return {
         getStates: getStates,
         defaultImages: defaultImages,
-        sportsList: sportsList
+        sportsList: sportsList,
+        getCoordinates: getCoordinates
     }
 });
