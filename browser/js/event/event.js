@@ -62,8 +62,8 @@ app.config(function($stateProvider){
            },
            controller: function($scope, event, user, EventFactory, $state) {
                $scope.event = event;
-               console.log($scope.event);
                $scope.reserved = false;
+               console.log($scope.event.attendees);
                angular.forEach($scope.event.attendees, function (val, key) {
                    if (val === user._id) {
                        $scope.reserved = true;

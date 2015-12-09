@@ -108,7 +108,7 @@ router.delete('/:id', function(req, res, next){
 router.get('/:id', function(req, res, next){
     Event
         .findOne({_id: req.params.id})
-        .populate('host', 'attendees')
+        .populate('host attendees')
         .exec()
         .then(function(doc){
             res.json(doc);

@@ -6,7 +6,7 @@ var schema = new mongoose.Schema({
     userName: String,
     firstName: String,
     lastName: String,
-    gender: {type:String, enum: ['Male', 'Female']},
+    gender: {type:String, enum: ['male', 'female']},
     birthday: String,
     profilePicture: String,
     sports: [{

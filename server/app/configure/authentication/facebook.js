@@ -10,7 +10,8 @@ module.exports = function (app) {
     var facebookCredentials = {
         clientID: facebookConfig.clientID,
         clientSecret: facebookConfig.clientSecret,
-        callbackURL: facebookConfig.callbackURL
+        callbackURL: facebookConfig.callbackURL,
+        profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'gender']
     };
 
     //var verifyCallback = function (accessToken, refreshToken, profile, done) {
@@ -67,8 +68,13 @@ module.exports = function (app) {
                     } else {
                         // if there is no user, create them
                         var newUser = new UserModel();
+                        newUser.userName = profile.displayName;
+                        newUser.gender = profile.gender;
+                        newUser.firstName = profile.name.givenName;
+                        newUser.lastName = profile.name.lastName;
                         newUser.facebook.id = profile.id;
                         newUser.facebook.token = token;
+                        newUser.profilePicture = profile.photos[0].value;
                         newUser.facebook.displayName = profile.displayName;
                         newUser.save(function(error) {
                             if (error)
@@ -81,9 +87,14 @@ module.exports = function (app) {
             } else {
                 // user already exists and is logged in, we have to link accounts
                 var user = req.user; // pull the user out of the session
+                user.userName = profile.displayName;
+                user.gender = profile.gender;
+                user.firstName = profile.name.givenName;
+                user.lastName = profile.name.lastName;
+                user.profilePicture = profile.photos[0].value;
                 user.facebook.id = profile.id;
                 user.facebook.token = token;
-                user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                user.facebook.displayName = profile.displayName;
 
                 user.save(function(err) {
                     if (err)
@@ -99,7 +110,7 @@ module.exports = function (app) {
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'user_friends'}));
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/login' }),

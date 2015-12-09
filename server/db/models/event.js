@@ -9,12 +9,6 @@ var schema = new mongoose.Schema({
 		type: String,
 	},
 	host: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	timeBegin: {
-		type: String,
-	},
-	timeEnd: {
-		type: String
-	},
 	location: {
 		lat: Number,
         lng: Number
@@ -30,9 +24,6 @@ var schema = new mongoose.Schema({
 		type: String
 	},
 	maxAttendees: {
-		type: Number
-	},
-	minAttendees: {
 		type: Number
 	},
 	fee: {

@@ -66,9 +66,9 @@
                     <div  layout="column" class="md-toolbar-tools-bottom inset">
                         <div layout="row">
                             <div flex="40">
-                                <img class="thumbnail-circle" src="icons/ming_portrait.jpg">
+                                <img class="thumbnail-circle" src="{{user.profilePicture}}">
                             </div>
-                            <div>Hi, {{ user.facebook.displayName || user.email}}!</div>
+                            <div>Hi, {{ user.userName }}!</div>
                         </div>
                         <button class="md-warn md-raised md-hue-2 md-button md-ink-ripple" ng-click="logout()">Logout</button>
                     </div>
