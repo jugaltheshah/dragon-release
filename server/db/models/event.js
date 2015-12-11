@@ -24,13 +24,15 @@ var schema = new mongoose.Schema({
 		type: String
 	},
 	maxAttendees: {
-		type: Number
+		type: Number,
+        default: 10
 	},
 	fee: {
 		type: Number
 	},
 	image: {
-		type: String
+		type: String,
+        default: 'http://posting.indyweek.com/images/icons/user_generic.gif'
 	},
     attendees: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	video: {

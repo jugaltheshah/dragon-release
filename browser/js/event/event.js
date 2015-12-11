@@ -63,37 +63,44 @@ app.config(function($stateProvider){
            controller: function($scope, event, user, EventFactory, $state) {
                $scope.event = event;
                $scope.reserved = false;
-               console.log($scope.event.attendees);
+               console.log($scope.event.host);
+               $scope.user = user;
                angular.forEach($scope.event.attendees, function (val, key) {
-                   if (val === user._id) {
+                   if (user && val._id === user._id) {
                        $scope.reserved = true;
                    }
                });
                $scope.join = function () {
-                   if (user === null) {
-                       alert('Please Login to Join the Sport.');
-                   }
-                   else {
+                   if($scope.reserved === false){
                        $scope.event.attendees.push(user);
+                       EventFactory.updateEvent($scope.event)
+                           .then(function (res) {
+                               $scope.reserved = true;
+                               return EventFactory.getEventById(res.data._id);
+                           })
+                           .then(function(res){
+                               $scope.event = res.data;
+                               console.log(res.data);
+                               $state.go('eventDetail', {id: res.data._id});
+                           });
                    }
-                   EventFactory.updateEvent($scope.event)
-                       .then(function (res) {
-                           $scope.reserved = true;
-                           $scope.event = res.data;
-                           $state.go('eventDetail', {id: res.data._id});
-                       });
+
                };
 
                $scope.cancel = function () {
                    angular.forEach($scope.event.attendees, function (val, key) {
-                       if (val === user._id) {
+                       if (val._id === user._id) {
                            $scope.event.attendees.splice(key, 1);
                        }
                    });
                    EventFactory.updateEvent($scope.event)
                        .then(function (res) {
                            $scope.reserved = false;
+                           return EventFactory.getEventById(res.data._id);
+                       })
+                       .then(function(res){
                            $scope.event = res.data;
+                           console.log(res.data);
                            $state.go('eventDetail', {id: res.data._id});
                        });
                };

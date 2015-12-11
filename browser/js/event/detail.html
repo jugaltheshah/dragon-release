@@ -2,6 +2,7 @@
     <div layout="row">
         <div flex="70">
             <h2 class="md-display-1">{{event.name}}</h2>
+            <a ui-sref="eventUpdate({id:event._id})" ng-show="user._id===event.host._id">edit</a>
             <div layout="column">
                 <div flex="25">
                     <md-button class="md-fab md-primary">
@@ -26,10 +27,13 @@
                     <span>{{event.fee || 'Free!'}}</span>
                 </div>
                 <div flex="25">
-                    <md-button ng-show="!reserved" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" ng-click="join()">
+                    <md-button ng-show="user && !reserved" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" ng-click="join()">
                         <span>RSVP</span>
                     </md-button>
-                    <md-button ng-show="reserved" class="md-raised md-warn md-button md-ink-ripple" ng-click="cancel()">
+                    <md-button ng-show="!user && !reserved" class="md-accent md-raised md-hue-1 md-button md-ink-ripple" ui-sref="login">
+                        <span>Join</span>
+                    </md-button>
+                    <md-button ng-show="user && reserved" class="md-raised md-warn md-button md-ink-ripple" ng-click="cancel()">
                         <span>Cancel</span>
                     </md-button>
                 </div>
@@ -53,7 +57,7 @@
                         <h4>Interested? Sport up?</h4>
                     </div>
                     <div flex="30">
-                        <md-button class="md-fab md-primary">Join</md-button>
+                        <md-button class="md-fab md-primary" ui-sref="login">Join</md-button>
                     </div>
                 </div>
             </md-content>
@@ -70,8 +74,8 @@
             <md-divider ></md-divider>
             <md-content>
                 <button class="md-raised md-button md-ink-ripple" type="button" style="margin-left:0; margin-right:0;"><span>Host</span><div class="md-ripple-container"></div></button>
-                <div>{{event.host.userName || 'John Doe'}}</div>
-                <img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif">
+                <div>{{event.host.userName}}</div>
+                <img class="img-circle" style="width: 15%; height: 15%" src="{{event.host.profilePicture}}">
             </md-content>
             <md-divider ></md-divider>
             <md-content>
@@ -82,10 +86,11 @@
                         </button>
                     </md-subheader>
                     <md-list-item class="md-3-line" ng-repeat="attendee in event.attendees">
-                        <img class="img-circle" style="width: 15%; height: 15%" src="http://posting.indyweek.com/images/icons/user_generic.gif">
+                        <div ui-sref="userDetail({id: attendee._id})">
+                            <img class="img-responsive" src="{{attendee.profilePicture}}">
+                        </div>
                         <div class="md-list-item-text" layout="column">
-                            <h3>{{ attendee.userName }}</h3>
-                            <h4>{{ attendee.email }}</h4>{{attendee}}
+                            <h3 ui-sref="userDetail({id: attendee._id})">{{ attendee.userName }}</h3>
                         </div>
                     </md-list-item>
                 </md-list>
