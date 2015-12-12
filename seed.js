@@ -62,11 +62,6 @@ var getRandomTags = function(n) {
     return taglist;
 }
 
-var getRandomUser = function() {
-  return User.find({}).then(function(users){
-    return chance.pick(users);
-  })  
-}
 var genRandomEvents = function(num) {
     return User.find({}).then(function(allUsers){
        var events = [];

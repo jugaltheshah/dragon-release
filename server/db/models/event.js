@@ -8,10 +8,7 @@ var schema = new mongoose.Schema({
 	sport: {
 		type: String,
 	},
-	host: {
-		type: String
-	},
-	/*{type: mongoose.Schema.Types.ObjectId, ref: 'User'}*/
+	host: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	location: {
 		latitude: Number,
         longitude: Number
@@ -27,16 +24,15 @@ var schema = new mongoose.Schema({
 		type: String
 	},
 	maxAttendees: {
-		type: Number
-	},
-	minAttendees: {
-		type: Number
+		type: Number,
+        default: 10
 	},
 	fee: {
 		type: Number
 	},
 	image: {
-		type: String
+		type: String,
+        default: 'http://posting.indyweek.com/images/icons/user_generic.gif'
 	},
     attendees: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	video: {
