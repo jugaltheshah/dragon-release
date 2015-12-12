@@ -33,23 +33,57 @@ app.config(function($stateProvider){
                            return res;
                        })
                },
-               fb_friends: function(facebookFactory, user){
-                   return facebookFactory.getFriends(user)
+               fb_friends: function(FacebookFactory, user){
+                   return FacebookFactory.getFriends(user)
                        .then(function(res){
                            return res.data;
                        });
+               },
+               events: function(EventFactory, user){
+                   var events = {host:[], attendee: []};
+                   return EventFactory.getEventsByHost(user)
+                       .then(function(res){
+                            events.host = res.data;
+                           return EventFactory.getEventsByAttendee(user);
+                       })
+                       .then(function(res){
+                           events.attendee =res.data;
+                           return events;
+                       });
                }
            },
-           controller: function($scope, user, me, fb_friends, facebookFactory){
-               //console.log(fb_friends);
+           controller: function($scope, user, me, events, fb_friends, FacebookFactory){
                $scope.friends = [];
+               $scope.events = events;
+               var tempHost={};
+               var tempAttendees = {};
+               $scope.hosts= [];
+               $scope.attendees= []
+               angular.forEach($scope.events.host, function(event, key){
+                    if(!tempHost[event.host._id]){
+                        $scope.hosts.push(event.host);
+                        tempHost[event.host._id] = true;
+                    }
+               });
+
+               angular.forEach($scope.events.attendee, function(event, key){
+                   angular.forEach(event.attendees, function(attendee, k){
+                        if(!tempAttendees[attendee._id]){
+                            $scope.attendees.push(attendee);
+                            tempAttendees[attendee._id] = true;
+                        }
+                   });
+               });
+
+
+               console.log($scope.hosts);
+               console.log($scope.attendees);
                angular.forEach(fb_friends, function(friend){
-                   facebookFactory.getPortrait(friend, me)
+                   FacebookFactory.getPortrait(friend, me)
                        .then(function(res){
                            $scope.friends.push({id: friend.id, name: friend.name, picture:res.data.url});
                        });
                });
-
                $scope.user = user;
                $scope.me = me;
            }

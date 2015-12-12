@@ -1,4 +1,3 @@
-{{friends}}
 <div class="container">
     <div class="jumbotron">
         <div class="row">
@@ -21,11 +20,17 @@
                 <label>About me</label>
                 <div ng-bind-html="user.bio"></div>
             </div>
-            <div class="well">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div id="hostedEventsList">
+                <label>Hosted events:</label>
+                <div ng-repeat="event in events.host">
+                    <event-detail eventdata="event"></event-detail>
+                </div>
+            </div>
+            <div id="joinedEventList">
+                <label>Joined events:</label>
+                <div ng-repeat="event in events.attendee">
+                    <event-detail eventdata="event"></event-detail>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -38,21 +43,29 @@
                     </div>
                 </div>
                 <div>
-                    <h4>You both played with</h4>
-                    <img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-                    <img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-                    <img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
+                    <h4>Hosts of events you joined</h4>
+                    <div ng-repeat="host in hosts">
+                        <span>{{host.userName}}</span>
+                        <img style="width:50px;height:50px" class="img-responsive" ng-src={{host.profilePicture}}>
+                    </div>
                 </div>
                 <div>
-                    <h4>Top Sports</h4>
-                    <img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-                    <img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-                    <img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
+                    <h4>Players you joined with</h4>
+                    <div ng-repeat="attendee in attendees">
+                        <span>{{attendee.userName}}</span>
+                        <img style="width:50px;height:50px" class="img-responsive" ng-src={{attendee.profilePicture}}>
+                    </div>
                 </div>
+                <!--<div>-->
+                    <!--<h4>Top Sports</h4>-->
+                    <!--<img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">-->
+                    <!--<img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">-->
+                    <!--<img style="width:50px;height:50px" class="img-rounded" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">-->
+                <!--</div>-->
             </div>
-            <div class="well">
-                <iframe src="https://www.youtube.com/embed/ckpwSAv5we8" frameborder="0" allowfullscreen></iframe>
-            </div>
+            <!--<div class="well">-->
+                <!--<iframe src="https://www.youtube.com/embed/ckpwSAv5we8" frameborder="0" allowfullscreen></iframe>-->
+            <!--</div>-->
         </div>
     </div>
 </div>
