@@ -215,14 +215,21 @@ app.config(function($stateProvider){
                $scope.states = Utils.getStates();
 
                $scope.getAddressQuery = function(q){
-                   console.log('q ', q);
                    return EventFactory.getEventsByMatchAddress(q)
                         .then(function(res){
-                            console.log(res);
                             return res.data;
                         })
                }
-
+                $scope.selectedItemChange = function(event){
+                    console.log('test', event.address1);
+                    $scope.event = {};
+                    $scope.event.address1 = event.address1;
+                    $scope.event.address2 = event.address2;
+                    $scope.event.city = event.city;
+                    $scope.event.state = event.state;
+                    $scope.event.zip = event.zip;
+                    $scope.selectedItem = null;
+                }
 
            }
        })

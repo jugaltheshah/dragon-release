@@ -42,10 +42,7 @@ app.factory('EventFactory', function($http){
     }
 
     function getEventsByMatchAddress(q) {
-        return $http.get('/api/events/address/'+q)
-            //.then(function(res){
-            //    return res.data;
-            //});
+        return $http.get('/api/events/address/'+q);
     }
 
 	return {
