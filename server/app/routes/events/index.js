@@ -3,7 +3,8 @@ var router = require('express').Router();
 module.exports = router;
 var _ = require('lodash');
 var mongoose =require('mongoose');
-var Event = require('../../../db/models/event.js')
+var Event = require('../../../db/models/event.js');
+var geocalc = require('../../../geocalc');
 
 router.get('/', function(req, res, next){
     console.log('Called! Getting Events!')
@@ -17,6 +18,15 @@ router.get('/', function(req, res, next){
         })
         .then(null, next);
 });
+
+router.post('/findNearby', function(req, res, next){
+    var userLoc = req.body.userLoc;
+    var events = req.body.events;
+    var distance = req.body.distance;
+    var filteredEvents = geocalc.findNearby(userLoc, events, distance);
+    console.log(filteredEvents.length);
+    res.send(filteredEvents);
+})
 
 router.post('/', function(req, res, next){
     var newEvent = req.body;

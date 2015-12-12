@@ -268,6 +268,6 @@ app.factory('Utils', function($http){
         getStates: getStates,
         defaultImages: defaultImages,
         sportsList: sportsList,
-        getCoordinates: getCoordinates
+        getCoordinates: getCoordinates,
     }
 });

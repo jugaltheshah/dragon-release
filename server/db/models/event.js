@@ -8,16 +8,13 @@ var schema = new mongoose.Schema({
 	sport: {
 		type: String,
 	},
-	host: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	timeBegin: {
-		type: String,
-	},
-	timeEnd: {
+	host: {
 		type: String
 	},
+	/*{type: mongoose.Schema.Types.ObjectId, ref: 'User'}*/
 	location: {
-		lat: Number,
-        lng: Number
+		latitude: Number,
+        longitude: Number
 	},
     date: String,
     address1:String,

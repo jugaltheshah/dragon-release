@@ -30,14 +30,13 @@ moment().format();
 
 var getRandomLocation = function() { //change this later to take a sport and return a location that makes sense for the sport input.
     var locations = [
-    {name: 'Central Park', coords: {latitude: 40.771606, longitude: -73.974819}},
-    {name: 'Chelsea Piers Sports Center', coords: {latitude: 40.746617, longitude: -74.010184}},
-    {name: 'Hudson River Park', coords: {latitude: 40.727127, longitude: -74.011334}},
-    {name: 'Central Park Great Lawn', coords: {latitude: 40.781389, longitude: -73.966553}},
-    {name: 'Nelson Rockefeller Park', coords: {latitude: 40.716920, longitude: -74.016867}},
-    {name: '"The Cage" W4 St Basketball Courts', coords: {latitude: 40.731041, longitude: -74.001244}},
+    {latitude: 40.771606, longitude: -73.974819},
+    {latitude: 40.746617, longitude: -74.010184},
+    {latitude: 40.727127, longitude: -74.011334},
+    {latitude: 40.781389, longitude: -73.966553},
+    {latitude: 40.716920, longitude: -74.016867},
+    {latitude: 40.731041, longitude: -74.001244},
     ]
-
     return locations[Math.floor(Math.random()*locations.length)];
 }
 
@@ -50,41 +49,67 @@ var getRandomSport = function() {
     var sports = ["Basketball", "Climbing", "Soccer", "Baseball", "Football", "Lifting", "Skiing", "Mountain Biking", "Surfing", "Cycling", 'Tennis']
     return sports[Math.floor(Math.random()*sports.length)];
 }
-var genRandomEvents = function(num) {
-    var events = [];
+var getRandomTags = function(n) {
+    var taglist = [];
+    var tags = [{text: 'Fun'}, {text:'Awesome'}, {text:'Cool'}, {text:'Advanced'}, {text:'Easy'}, {text:'Hardcore'}, {text:'Music'}, {text:'Weekend'}, {text:'Day Trip'}, {text:'Night Time'}, {text:'Day Time'}, {text:'After Work'}, {text:'Kids'}, {text:'Adults'}, {text:'Intermediate'}];
+    while(taglist.length < n) {
+        if (taglist.length === tags.length) {
+            break;
+        }
+        var randtag = tags[Math.floor(Math.random()*tags.length)]
+        taglist.push(randtag)
+    }
+    return taglist;
+}
 
-    for(i=0;i<num;i++) {
+var getRandomUser = function() {
+  return User.find({}).then(function(users){
+    return chance.pick(users);
+  })  
+}
+var genRandomEvents = function(num) {
+    return User.find({}).then(function(allUsers){
+       var events = [];
+
+       for(i=0;i<num;i++) {
+        console.log(i);
+        console.log(num);
         var newEvent = {
-            name: chance.sentence({words: 3}),
-            host: chance.first(),
+            name: chance.sentence({words: 2}),
+            host: chance.pick(allUsers)._id,
             sport: getRandomSport(),
-            timeBegin: moment(chance.date({string: true, year: 2015, month: 11})+'T'+chance.hour()+':'+chance.minute()+':00.000Z', 'h:mm A'),
-            timeEnd: moment(chance.date({string: true, year: 2015, month: 11})+'T'+chance.hour()+':'+chance.minute()+':00.000Z', 'h:mm A'),
+            date: new Date(chance.date({string: true, year: 2015, month: 11, day: chance.integer({min: 11, max: 31})})),
             location: getRandomLocation(),
             level: getRandomLevel(),
+            tags: getRandomTags(),
             description: chance.paragraph({sentences: 1})
         }
-        events.push(newEvent);
-    }
-       return events;
+         events.push(newEvent);
+        }
+        return events;
+    })   
 }
 
 var seedUsers = function () {
 
     var users = [
         {
+            userName: 'Jugal',
             email: 'jugal@fsa.com',
             password: 'jugal'
         },
         {
+            userName: 'June',
             email: 'june@fsa.com',
             password: 'june'
         },
         {
+            userName: 'Mingjie',
             email: 'mingjie@fsa.com',
             password: 'mingjie'
         },
 	{
+            userName: 'Bryce',
             email: 'bryce@fsa.com',
             password: 'bryce'
         }
@@ -95,59 +120,9 @@ var seedUsers = function () {
 };
 
 var seedEvents = function () {
-
-    var events = genRandomEvents(12);
-    var staticEvents = [
-    {
-        name: 'The best soccer game ever',
-        host: 'bryce',
-        sport: 'Soccer',
-        timeBegin: '2015-12-08T14:30:00.000Z',
-        timeEnd: '2015-12-08T14:30:00.000Z',
-        location: {name: 'Central Park', coords: {latitude: 40.771606, longitude: -73.974819}},
-        tags: ['Soccer', 'Fun', 'Central Park', 'Easy'],
-        level: 'Beginner (1-2)',
-        minAttendees: 10,
-        maxAttendees: 16,
-        image: 'https://thomasblondal.files.wordpress.com/2014/10/norge-kampen.jpg',
-        description: 'A soccer game for beginners. Not intense at all. Basically we\'ll just be kicking around a ball and having fun.'
-    },
-    {
-        name: 'Chelsea Piers Basketball Tournament',
-        host: 'mingjie',
-        sport: 'Basketball',
-        timeBegin: '2015-12-10T18:30:00.000Z',
-        timeEnd: '2015-12-08T14:30:00.000Z',
-        location: {name: 'Chelsea Piers Sports Center', coords: {latitude: 40.746617, longitude: -74.010184}},
-        tags: ['Basketball', 'Tournament', 'Chelsea Piers'],
-        level: 'Intermediate (5-6)',
-        fee: 25.00,
-        minAttendees: 20,
-        maxAttendees: 30,
-        image: 'https://thomasblondal.files.wordpress.com/2014/10/norge-kampen.jpg',
-        description: 'Basketball tournament at Chelsea Piers! Be good. No scrubs allowed. Teams randomly assigned. Winning team gets $100 each!'
-    },
-    {
-        name: 'Intense Tennis Match',
-        host: 'jugal',
-        sport: 'Tennis',
-        timeBegin: '2015-12-09T17:30:00.000Z',
-        timeEnd: '2015-12-08T14:30:00.000Z',
-        location: {name: 'Hudson River Park Tennis Courts', coords: {latitude: 40.727127, longitude: -74.011334}},
-        tags: ['Tennis', 'Practice', 'Challenging', 'Match'],
-        level: 'Pro (9-10)',
-        minAttendees: 2,
-        maxAttendees: 2,
-        image: 'https://thomasblondal.files.wordpress.com/2014/10/norge-kampen.jpg',
-        description: 'I\'m really good at Tennis and I need a partner who is also really good at Tennis. Looking to play ASAP.'
-    }
-    ]
-
-    staticEvents.forEach(function(staticEvent){
-        events.push(staticEvent);
+    return genRandomEvents(15).then(function(events){
+        return Event.createAsync(events);
     });
-
-    return Event.createAsync(events);
 }
 
 connectToDb.then(function () {
