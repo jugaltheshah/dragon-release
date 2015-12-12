@@ -10,8 +10,8 @@ var schema = new mongoose.Schema({
 	},
 	host: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	location: {
-		lat: Number,
-        lng: Number
+		latitude: Number,
+        longitude: Number
 	},
     date: String,
     address1:String,

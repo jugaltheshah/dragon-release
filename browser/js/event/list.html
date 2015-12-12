@@ -1,17 +1,19 @@
 <div layout="row">
 
-    <div id="map-container" flex="70">
+    <div id="map-container" flex="60">
         <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-            <ui-gmap-marker ng-repeat="event in events" coords="event.location.coords" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
+            <ui-gmap-marker ng-repeat="event in events" coords="event.location" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
+            </ui-gmap-marker>
+            <ui-gmap-marker coords="userMarker.location" options="{title: userMarker.name}" idkey="0">
                 <ui-gmap-window options="{content: ''}" isIconVisibleOnClick="true">
                 </ui-gmap-window>
             </ui-gmap-marker>
         </ui-gmap-google-map>
     </div>
-    <div flex="30">
+    <div flex="40">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
-            <input type="text" class="form-control" placeholder="Search by Event Name or Tag" aria-describedby="basic-addon1" ng-model="searchSettings.query">
+            <input type="text" class="form-control" placeholder="Search by Event Name or Tag" aria-describedby="basic-addon1" ng-model="search.query" ng-click="search(search.query)">
         </div>
             <div layout="row">
                 <div flex="30">
@@ -19,9 +21,9 @@
                     <md-content>
                         <md-input-container>
                             <md-radio-group ng-model="filter.distance">
-                                <md-radio-button value="walking" ng-click="filterDistance('walking')" >Walking (2 mi.)</md-radio-button>
-                                <md-radio-button value="biking" ng-click="filterDistance('biking')" >Biking (5 mi.)</md-radio-button>
-                                <md-radio-button value="driving" ng-click="filterDistance('driving')">Driving (10 mi.)</md-radio-button>
+                                <md-radio-button value="walking" ng-click="filterDistance('walking')" ng-disabled="!userLocReady">Walking (1 mi.)</md-radio-button>
+                                <md-radio-button value="biking" ng-click="filterDistance('biking')" ng-disabled="!userLocReady">Biking (4 mi.)</md-radio-button>
+                                <md-radio-button value="driving" ng-click="filterDistance('driving')" ng-disabled="!userLocReady">Driving (10 mi.)</md-radio-button>
                             </md-radio-group>
                         </md-input-container>
                     </md-content>
@@ -30,23 +32,25 @@
                     <h4>Find Events by Date:</h4>
                     <md-content>
                         <md-input-container>
-                            <md-radio-group ng-model="filter.durance">
-                                <md-radio-button value="Today" ng-click="filterDistance('walking')" >Events Today</md-radio-button>
-                                <md-radio-button value="This Week" ng-click="filterDistance('biking')" >Events This Week</md-radio-button>
-                                <md-radio-button value="Next Week" ng-click="filterDistance('driving')">Events Next Week</md-radio-button>
+                            <md-radio-group ng-model="filter.timePeriod">
+                                <md-radio-button value="Today" ng-click="filterTime('today')" >Events Today</md-radio-button>
+                                <md-radio-button value="This Week" ng-click="filterTime('thisweek')" >Events This Week</md-radio-button>
+                                <md-radio-button value="Next Week" ng-click="filterTime('nextweek')">Events Next Week</md-radio-button>
                             </md-radio-group>
                         </md-input-container>
                     </md-content>
                 </div>
                 <div flex="40">
-                    <!--<datetimepicker ng-model="searchSettings.date"></datetimepicker>-->
-                <md-datepicker ng-model="searchSettings.date" md-placeholder="Enter date"></md-datepicker>
-                    <md-input-container style="margin-right: 10px;">
+                <md-datepicker ng-model="filter.date" md-placeholder="Enter date" ng-change="specifyDate(filter.date)"></md-datepicker>
+                    <md-input-container style="margin-right: 40px; margin-bottom: 0; padding: 6px">
                         <label>Filter By Sport</label>
                         <md-select ng-model="searchSettings.sport">
                             <md-option ng-repeat="sport in sportsList" value="{{sport}}" ng-click='filterSport(sport)'>{{sport}}</md-option>
                         </md-select>
                     </md-input-container>
+                    <md-radio-group>
+                        <md-button class="md-accent md-raised md-hue-1" ng-click="removeFilters()"> Remove Filters</md-button>
+                    </md-radio-group>
                 </div>
             </div>
             <div id="eventsList">

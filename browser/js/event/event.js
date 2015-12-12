@@ -8,24 +8,24 @@ app.config(function($stateProvider){
                   return EventFactory.getEvents();
                 }
            },
-           controller: function($scope, uiGmapGoogleMapApi, Utils, events){
-              console.log(navigator.geolocation);
+           controller: function($scope, $http, uiGmapGoogleMapApi, Utils, events){
+                var userLocation;
+                  if (navigator.geolocation)
+                    navigator.geolocation.getCurrentPosition(function(pos){
+                      userLocation = {latitude: pos.coords.latitude, longitude: pos.coords.longitude};
+                      console.log(userLocation);
+                      $scope.userLocReady = true;
+                      $scope.userLoc = userLocation;
+                      $scope.userMarker = {name: 'Your Location', location: userLocation, id: 0};
+                      $scope.$digest();
+                    });
+               $scope.markers = [];
+               $scope.userLocReady = false;
                $scope.events = events;
                $scope.map = { center: { latitude: 40.773959, longitude: -73.970949 }, zoom: 14 };
-               uiGmapGoogleMapApi.then(function(maps) {});
                $scope.sportsList = Utils.sportsList;
                $scope.selectedSport = 'Filter by Sport';
 
-               $scope.filterDistance = function(distance) {
-                $scope.events = events;
-                var filteredList = [];
-                  for(var i=0; i<$scope.events.length; i++){
-                    if ($scope.events[i].sport === sport) {
-                      filteredList.push($scope.events[i]);
-                    }
-                  }
-                $scope.events = filteredList;
-               }
                $scope.filterSport = function(sport){
                 $scope.selectedSport = sport;
                 $scope.events = events;
@@ -39,8 +39,86 @@ app.config(function($stateProvider){
                }
 
                $scope.filterDistance = function(distance) {
-                console.log('called with distance: '+distance);
-               }
+                var data = {
+                    userLoc: $scope.userLoc,
+                    events: $scope.events,
+                    distance: distance
+                }
+
+                if ($scope.userLocReady) {
+                  $http.post('/api/events/findNearby', data).then(function(res){
+                    $scope.events = res.data;
+                  })
+                }
+              }
+
+              $scope.specifyDate = function(date){
+                var t = new Date(date).getTime();
+
+                $scope.events = $scope.events.filter(function(event){
+                  var d = new Date(event.date).getTime()
+                
+                  if (d == t){
+                    console.log('Match!');
+                    return event
+                  }
+                })
+              }
+              $scope.removeFilters = function() {
+                $scope.events = events;
+                $scope.filter = {};
+              }
+              $scope.search = function(query) {
+                var query = query.toString();
+                var matches = [];
+
+                events.forEach(function(event){
+                    if (event.name == query) {
+                      matches.push(event);
+                    }
+                    else {
+                      event.tags.forEach(function(tag){
+                        if (tag.text == query) {
+                          matches.push(event);
+                        }
+                      })
+                    }
+                })
+                $scope.events = matches;
+              }
+              $scope.filterTime = function(time){
+                  var now = new Date();
+                  var then;
+
+                  switch(time) {
+                    case 'today':
+                      then = new Date().setHours(23,59,59);
+                      break;
+                    case 'thisweek':
+                      then = new Date().setDate(now.getDate()+7);
+                      break;
+                    case 'nextweek':
+                      then = new Date().setDate(now.getDate()+14);
+
+                  }                  
+                  console.log(then);
+
+                  var filteredEvents = $scope.events.filter(function(event){
+                    var d = new Date(event.date);
+                    if (d < then) {
+                      return event
+                    }
+                  });
+
+                  filteredEvents.sort(function(a, b){
+                    var dateA = new Date(a.date), dateB = new Date(b.date);
+                    if (dateA < dateB) return -1;
+                    if (dateA > dateB) return 1;
+                    return 0;
+                  });
+                  console.log(filteredEvents);
+                  $scope.events = filteredEvents
+                }
            }
        })
        .state('eventDetail', {
