@@ -26,10 +26,32 @@ app.config(function($stateProvider){
                        .then(function(res){
                            return res.data;
                        })
+               },
+               me: function(AuthService){
+                   return AuthService.getLoggedInUser()
+                       .then(function(res){
+                           return res;
+                       })
+               },
+               fb_friends: function(facebookFactory, user){
+                   return facebookFactory.getFriends(user)
+                       .then(function(res){
+                           return res.data;
+                       });
                }
            },
-           controller: function($scope, user){
+           controller: function($scope, user, me, fb_friends, facebookFactory){
+               //console.log(fb_friends);
+               $scope.friends = [];
+               angular.forEach(fb_friends, function(friend){
+                   facebookFactory.getPortrait(friend, me)
+                       .then(function(res){
+                           $scope.friends.push({id: friend.id, name: friend.name, picture:res.data.url});
+                       });
+               });
+
                $scope.user = user;
+               $scope.me = me;
            }
        })
        .state('userEdit', {

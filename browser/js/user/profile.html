@@ -1,16 +1,16 @@
-{{user}}
+{{friends}}
 <div class="container">
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-2">
-                <img style="width:100px;height:100px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
+                <img style="width:100px;height:100px" class="img-circle" ng-src={{user.profilePicture}}>
             </div>
             <div class="col-md-5">
                 <h3>{{user.userName}}</h3>
                 <h4>{{user.motto}}</h4>
                 <h4>{{user.address.city}} {{user.address.state}}, {{user.address.country}}</h4>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5" ng-show="me._id===user._id">
                 <a ui-sref="userEdit({id: user._id})" class="btn btn-info">Edit</a>
             </div>
         </div>
@@ -31,10 +31,11 @@
         <div class="col-md-4">
             <div class="well">
                 <div>
-                    <h4>Mutual Friends</h4>
-                    <img style="width:50px;height:50px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-                    <img style="width:50px;height:50px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
-                    <img style="width:50px;height:50px" class="img-circle" src="http://www.partypacks.co.uk/images/products/product_93558_1_orig.jpg">
+                    <h4>Facebook Friends</h4>
+                    <div ng-repeat="friend in friends">
+                        <span>{{friend.name}}</span>
+                        <img style="width:50px;height:50px" class="img-circle" ng-src={{friend.picture}}>
+                    </div>
                 </div>
                 <div>
                     <h4>You both played with</h4>

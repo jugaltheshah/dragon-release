@@ -41,6 +41,9 @@
         <script src="/angular-material/angular-material.js"></script>
         <script src="/angular-material-icons/angular-material-icons.js"></script>
 
+        <script src="/facebook_grap_api/ngFacebook.js"></script>
+        <script src="http://rawgithub.com/Ciul/angular-facebook/master/lib/angular-facebook.js"></script>
+
         <script src="/main.js"></script>
         <script>
         var socket = io('http://localhost:1337');
@@ -66,7 +69,7 @@
                     <div  layout="column" class="md-toolbar-tools-bottom inset">
                         <div layout="row">
                             <div flex="40">
-                                <img class="thumbnail-circle" src="{{user.profilePicture}}">
+                                <img class="thumbnail-circle" ng-src={{user.profilePicture}}>
                             </div>
                             <div>Hi, {{ user.userName }}!</div>
                         </div>
@@ -93,12 +96,12 @@
                            </md-button>
                            <md-button ui-sref="eventCreate">Create A Event</md-button>
                        </md-list-item>
-                       <md-list-item>
-                           <md-button class="md-fab md-primary" ui-sref="users">
-                               <md-icon md-svg-src="icons/people_icon1.svg"></md-icon>
-                           </md-button>
-                           <md-button ui-sref="users">Find Players</md-button>
-                       </md-list-item>
+                       <!--<md-list-item>-->
+                           <!--<md-button class="md-fab md-primary" ui-sref="users">-->
+                               <!--<md-icon md-svg-src="icons/people_icon1.svg"></md-icon>-->
+                           <!--</md-button>-->
+                           <!--<md-button ui-sref="users">Find Players</md-button>-->
+                       <!--</md-list-item>-->
                    </md-list>
                 </md-content>
             </md-sidenav>

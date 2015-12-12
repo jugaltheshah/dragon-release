@@ -42,7 +42,10 @@ module.exports = function (app) {
     var verifyCallback = function(req, token, refreshToken, profile, done) {
         // asynchronous
 
-        console.log(profile);
+        console.log(arguments);
+        if(!token && refreshToken){
+            token = refreshToken.access_token;
+        }
         process.nextTick(function() {
 
             // check if the user is already logged in

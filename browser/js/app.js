@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'ngMdIcons', 'fsaPreBuilt', 'ngFileUpload', 'ngAnimate', 'textAngular', 'uiGmapgoogle-maps', 'ngTagsInput', 'slidePushMenu', 'ngAutocomplete', 'ui.bootstrap.datetimepicker']);
+window.app = angular.module('FullstackGeneratedApp', ['ui.router', 'ui.bootstrap', 'ngMaterial', 'ngMdIcons', 'facebook', 'fsaPreBuilt', 'ngFileUpload', 'ngAnimate', 'textAngular', 'uiGmapgoogle-maps', 'ngTagsInput', 'slidePushMenu', 'ngAutocomplete', 'ui.bootstrap.datetimepicker']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -14,6 +14,12 @@ app.config(function ($urlRouterProvider, $locationProvider) {
         libraries: 'weather,geometry,visualization'
     });
 })
+.config(function(FacebookProvider) {
+    FacebookProvider.init({
+        appId: '762735407187504'
+    });
+})
+;
 
 // This app.run is for controlling access to specific states.
 app.run(function ($rootScope, AuthService, $state) {
