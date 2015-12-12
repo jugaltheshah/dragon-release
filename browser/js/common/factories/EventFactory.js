@@ -41,7 +41,9 @@ app.factory('EventFactory', function($http){
         });
     }
 
-
+    function getEventsByMatchAddress(q) {
+        return $http.get('/api/events/address/'+q);
+    }
 
 	return {
 		getUrl: function(type) {
@@ -53,6 +55,7 @@ app.factory('EventFactory', function($http){
         updateEvent: updateEvent,
 		sportsList: sportsList,
         getEventsByAttendee: getEventsByAttendee,
-        getEventsByHost: getEventsByHost
+        getEventsByHost: getEventsByHost,
+        getEventsByMatchAddress: getEventsByMatchAddress
 	}
 });

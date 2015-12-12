@@ -90,6 +90,34 @@
                             </md-input-container>
                         </md-content>
                     </md-content>
+                    <md-content layout-padding layout="column">
+                        <md-autocomplete
+                                md-no-cache="true"
+                                md-selected-item="selectedItem"
+                                md-search-text="searchedAddress"
+                                md-selected-item-change="selectedItemChange(event)"
+                                md-items="event in getAddressQuery(searchedAddress)"
+                                md-item-text="event.address1"
+                                md-min-length="1"
+                                placeholder="Maybe we already have the address you want"
+                                md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                  <span class="item-title">
+                                    <md-icon md-svg-icon="icons/location.svg"></md-icon>
+                                    <strong> {{event.address1}} {{event.address2}} {{event.city}} {{event.state}} {{event.zip}} </strong>
+                                  </span>
+                                   <span class="item-metadata">
+                                       |  Sport: <strong>{{event.sport}}</strong>
+                                   </span>
+                                  <span class="item-metadata">
+                                       |  Event:
+                                    <a ui-sref="eventDetail({id: event._id})" class="item-metastat">
+                                        <strong>{{event.name}}</strong>
+                                    </a>
+                                  </span>
+                            </md-item-template>
+                        </md-autocomplete>
+                    </md-content>
                     <md-content layout-padding layout="row">
                         <form name="addressForm">
                             <md-input-container class="md-block">

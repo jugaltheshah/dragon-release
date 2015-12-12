@@ -57,7 +57,7 @@ app.config(function($stateProvider){
 
                 $scope.events = $scope.events.filter(function(event){
                   var d = new Date(event.date).getTime()
-                
+
                   if (d == t){
                     console.log('Match!');
                     return event
@@ -100,7 +100,7 @@ app.config(function($stateProvider){
                     case 'nextweek':
                       then = new Date().setDate(now.getDate()+14);
 
-                  }                  
+                  }
                   console.log(then);
 
                   var filteredEvents = $scope.events.filter(function(event){
@@ -203,6 +203,7 @@ app.config(function($stateProvider){
                     var addressString_post = addressString_pre.split(' ').join('+');
                     Utils.getCoordinates(addressString_post)
                         .then(function(res){
+                            console.log(res);
                             $scope.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
                             return EventFactory.createEvent($scope.event)
                         })
@@ -212,6 +213,24 @@ app.config(function($stateProvider){
                };
                $scope.sportsList = Utils.sportsList;
                $scope.states = Utils.getStates();
+
+               $scope.getAddressQuery = function(q){
+                   return EventFactory.getEventsByMatchAddress(q)
+                        .then(function(res){
+                            return res.data;
+                        })
+               }
+                $scope.selectedItemChange = function(event){
+                    console.log('test', event.address1);
+                    $scope.event = {};
+                    $scope.event.address1 = event.address1;
+                    $scope.event.address2 = event.address2;
+                    $scope.event.city = event.city;
+                    $scope.event.state = event.state;
+                    $scope.event.zip = event.zip;
+                    $scope.selectedItem = null;
+                }
+
            }
        })
        .state('eventUpdate', {
@@ -250,6 +269,23 @@ app.config(function($stateProvider){
                }
                $scope.sportsList = Utils.sportsList;
                $scope.states = Utils.getStates();
+
+               $scope.getAddressQuery = function(q){
+                   return EventFactory.getEventsByMatchAddress(q)
+                       .then(function(res){
+                           return res.data;
+                       })
+               }
+               $scope.selectedItemChange = function(event){
+                   console.log('test', event.address1);
+                   $scope.event = {};
+                   $scope.event.address1 = event.address1;
+                   $scope.event.address2 = event.address2;
+                   $scope.event.city = event.city;
+                   $scope.event.state = event.state;
+                   $scope.event.zip = event.zip;
+                   $scope.selectedItem = null;
+               }
            }
        });
 });
