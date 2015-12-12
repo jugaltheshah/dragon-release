@@ -6,7 +6,12 @@
                 <md-card-title-text flex="60">
                     <div class="md-headline" ui-sref="eventDetail({id: eventdata._id})"><a href>{{eventdata.name}}</a></div>
                     <div class="md-subhead">{{eventdata.sport}}</div>
-                    <div class="md-subhead">{{eventdata.date | date : 'shortDate'}}</div>
+                    <div class="md-subhead">{{eventdata.dateTime.date | date : 'shortDate'}}</div>
+                    <span>{{eventdata.dateTime.time}}</span> <span>{{eventdata.dateTime.ampm}}</span>
+
+
+
+
                 </md-card-title-text>
                 <md-card-title-media  flex="40" class="pull-right">
                     <div class="md-media-sm card-media">

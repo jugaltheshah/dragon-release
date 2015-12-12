@@ -13,7 +13,11 @@ var schema = new mongoose.Schema({
 		latitude: Number,
         longitude: Number
 	},
-    date: String,
+    dateTime: {
+    	date:String,
+    	time:String,
+    	ampm:String
+    },
     address1:String,
     address2: String,
     city: String,
