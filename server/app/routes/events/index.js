@@ -125,3 +125,27 @@ router.get('/:id', function(req, res, next){
         })
         .then(null, next);
 });
+
+router.get('/attendee/:id', function(req, res, next){
+    var uid = req.params.id;
+    Event
+        .find({attendees: {$elemMatch: {$eq: uid}}})
+        .populate('host attendees')
+        .exec()
+        .then(function(doc){
+            res.json(doc);
+        })
+        .then(null, next);
+});
+
+router.get('/host/:id', function(req, res, next){
+    var uid = req.params.id;
+    Event
+        .find({host:uid})
+        .populate('host attendees')
+        .exec()
+        .then(function(doc){
+            res.json(doc);
+        })
+        .then(null, next);
+});

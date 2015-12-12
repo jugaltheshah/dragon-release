@@ -27,6 +27,14 @@ app.factory('EventFactory', function($http){
         return $http.get('/api/events/'+id);
     }
 
+    function getEventsByHost(user){
+        return $http.get('/api/events/host/'+user._id);
+    }
+
+    function getEventsByAttendee(user){
+        return $http.get('/api/events/attendee/'+user._id);
+    }
+
     function getEvents() {
         return $http.get('/api/events').then(function(res){
             return res.data;
@@ -43,6 +51,8 @@ app.factory('EventFactory', function($http){
         getEventById: getEventById,
         getEvents: getEvents,
         updateEvent: updateEvent,
-		sportsList: sportsList
+		sportsList: sportsList,
+        getEventsByAttendee: getEventsByAttendee,
+        getEventsByHost: getEventsByHost
 	}
 });
