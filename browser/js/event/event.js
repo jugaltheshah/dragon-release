@@ -213,6 +213,17 @@ app.config(function($stateProvider){
                };
                $scope.sportsList = Utils.sportsList;
                $scope.states = Utils.getStates();
+
+               $scope.getAddressQuery = function(q){
+                   console.log('q ', q);
+                   return EventFactory.getEventsByMatchAddress(q)
+                        .then(function(res){
+                            console.log(res);
+                            return res.data;
+                        })
+               }
+
+
            }
        })
        .state('eventUpdate', {
