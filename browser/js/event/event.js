@@ -203,11 +203,15 @@ app.config(function($stateProvider){
                     var addressString_post = addressString_pre.split(' ').join('+');
                     Utils.getCoordinates(addressString_post)
                         .then(function(res){
-                            console.log(res);
-                            $scope.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                            $scope.event.location = {};
+                            if(res.data.status === 'OK') {
+                                $scope.event.location.latitude = res.data.results[0].geometry.location.lat;
+                                $scope.event.location.longitude = res.data.results[0].geometry.location.lng;
+                            }
                             return EventFactory.createEvent($scope.event)
                         })
                         .then(function(res){
+                            console.log(res.data);
                             $state.go('eventDetail', {id: res.data._id});
                         });
                };
@@ -260,10 +264,18 @@ app.config(function($stateProvider){
                    console.log(addressString_post);
                    Utils.getCoordinates(addressString_post)
                        .then(function(res){
-                           $scope.event.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                           if(!$scope.event.location) {
+                               $scope.event.location = {};
+                           }
+                           if(res.data.status === 'OK') {
+                               $scope.event.location.latitude = res.data.results[0].geometry.location.lat;
+                               $scope.event.location.longitude = res.data.results[0].geometry.location.lng;
+                           }
+                           //$scope.event.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
                            return EventFactory.updateEvent($scope.event)
                        })
                        .then(function(res){
+                           console.log(res);
                            $state.go('eventDetail', {id: res.data._id});
                        });
                }
