@@ -15,7 +15,35 @@
         <br>
         <br>
         <div class="search-bar">
-            <input class="form-control" placeholder="Search by Sport, Player, Location..." >
+            <!--<input class="form-control" placeholder="Search by Sport, Player, Location..." >-->
+            <md-content layout-padding layout="column">
+                <form ng-submit="$event.preventDefault()">
+                    <md-autocomplete
+                            md-selected-item="selectedItem"
+                            md-search-text-change="searchTextChange(searchText)"
+                            md-search-text="searchText"
+                            md-selected-item-change="selectedItemChange(item)"
+                            md-items="item in querySearch(searchText)"
+                            md-item-text="item.name"
+                            md-min-length="1"
+                            placeholder="Pick an Angular repository"
+                            md-menu-class="autocomplete-custom-template">
+                        <md-item-template>
+                                <span class="item-title">
+                                    <code> {{item.name}} - {{item.sport}} </code>
+                                </span>
+                                <span class="item-content">
+                                    <md-icon md-svg-icon="icons/location.svg"></md-icon>
+                                    <strong> {{item.address1}} {{item.address2}} {{item.city}} {{item.state}} {{item.zip}} </strong>
+                                </span>
+                        </md-item-template>
+                        <md-not-found>
+                            No events were found.
+                            <a href ui-sref="eventCreate()">Create a event!</a>
+                        </md-not-found>
+                    </md-autocomplete>
+                </form>
+            </md-content>
         </div>
         <br>
         <br>
