@@ -45,6 +45,10 @@ app.factory('EventFactory', function($http){
         return $http.get('/api/events/address/'+q);
     }
 
+    function searchOverallEvent(q){
+        return $http.get('/api/events/all/'+q);
+    }
+
 	return {
 		getUrl: function(type) {
 			return defaultImages[type];
@@ -56,6 +60,7 @@ app.factory('EventFactory', function($http){
 		sportsList: sportsList,
         getEventsByAttendee: getEventsByAttendee,
         getEventsByHost: getEventsByHost,
-        getEventsByMatchAddress: getEventsByMatchAddress
+        getEventsByMatchAddress: getEventsByMatchAddress,
+        searchOverallEvent: searchOverallEvent
 	}
 });

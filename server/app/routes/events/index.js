@@ -162,3 +162,26 @@ router.get('/address/:q', function(req, res, next){
         })
         .then(null, next);
 });
+
+
+router.get('/all/:q', function(req, res, next){
+
+    var q = req.params.q;
+    Event
+        .find({$or: [{'address1': new RegExp(q, 'i')},
+                     {'address2': new RegExp(q,'i')},
+                        {'city': new RegExp(q, 'i')},
+                        {'state': new RegExp(q, 'i')},
+                        {'zip': new RegExp(q, 'i')},
+                        {'name': new RegExp(q, 'i')},
+                        {'sport': new RegExp(q, 'i')},
+                        {'tags.text': new RegExp(q, 'i') },
+                        {'description': new RegExp(q, 'i')}
+        ]})
+        .populate('host attendees')
+        .exec()
+        .then(function(doc){
+            res.json(doc);
+        })
+        .then(null, next);
+});
