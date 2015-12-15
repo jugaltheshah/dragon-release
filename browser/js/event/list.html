@@ -2,11 +2,10 @@
 
     <div id="map-container" flex="60">
         <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-            <ui-gmap-marker ng-repeat="event in events" coords="event.location" options="{title: event.name}" mouseover="showEventDetails(event)" idkey="event._id">
-            </ui-gmap-marker>
+            <ui-gmap-markers models="markers" coords="'self'" options="options" mouseover="mouseover" icon="'icon'">
+            <ui-gmap-window>{{m.icon}}</ui-gmap-window>
+            </ui-gmap-markers>
             <ui-gmap-marker coords="userMarker.location" options="{title: userMarker.name}" idkey="0">
-                <ui-gmap-window options="{content: ''}" isIconVisibleOnClick="true">
-                </ui-gmap-window>
             </ui-gmap-marker>
         </ui-gmap-google-map>
     </div>

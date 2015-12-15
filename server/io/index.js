@@ -12,7 +12,6 @@ module.exports = function (server) {
     	socket.emit('connected', {
     		message: 'Connected to Socket!'
     	});
-        // Now have access to socket, wowzers!
     });
     
     return io;

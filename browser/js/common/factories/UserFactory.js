@@ -13,7 +13,7 @@ app.factory('UserFactory', function($http){
                 month: '06',
                 year: '2010'
             },
-            motto: 'Little Asshold',
+            motto: 'Little Asshole',
             address: {
                 address1: '321 broadway',
                 address2: 'apt 4c',
