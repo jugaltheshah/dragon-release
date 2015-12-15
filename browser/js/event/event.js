@@ -8,23 +8,44 @@ app.config(function($stateProvider){
                   return EventFactory.getEvents();
                 }
            },
-           controller: function($scope, $http, uiGmapGoogleMapApi, Utils, events){
+           controller: function($scope, $http, uiGmapGoogleMapApi, Utils, events, Socket){
+                var events = events;
                 var userLocation;
-                  if (navigator.geolocation)
-                    navigator.geolocation.getCurrentPosition(function(pos){
-                      userLocation = {latitude: pos.coords.latitude, longitude: pos.coords.longitude};
-                      console.log(userLocation);
-                      $scope.userLocReady = true;
-                      $scope.userLoc = userLocation;
-                      $scope.userMarker = {name: 'Your Location', location: userLocation, id: 0};
-                      $scope.$digest();
-                    });
-               $scope.markers = [];
+                var getMarkers = function() { 
+                  var markerList = [];
+                  $scope.events.forEach(function(event){
+                      if (event.location) {
+                        markerList.push({
+                        name: event.name,
+                        latitude: event.location.latitude,
+                        longitude: event.location.longitude,
+                        options: '{title:'+event.name+'}',
+                        icon: Utils.mapIconUrls[event.sport.toLowerCase()],
+                        mouseover: 'showEventDetails('+event+')',
+                        id: event._id
+                      })
+                    }
+                  });
+                  return markerList;
+               };
+
+                if (navigator.geolocation)
+                  navigator.geolocation.getCurrentPosition(function(pos){
+                    userLocation = {latitude: pos.coords.latitude, longitude: pos.coords.longitude};
+                    $scope.userLocReady = true;
+                    $scope.userLoc = userLocation;
+                    $scope.userMarker = {name: 'Your Location', location: userLocation, id: 0};
+                    $scope.$digest();
+                  });
+
                $scope.userLocReady = false;
                $scope.events = events;
+               $scope.markers = getMarkers();
                $scope.map = { center: { latitude: 40.773959, longitude: -73.970949 }, zoom: 14 };
                $scope.sportsList = Utils.sportsList;
                $scope.selectedSport = 'Filter by Sport';
+               $scope.selectedFilter = null;
+               
 
                $scope.filterSport = function(sport){
                 $scope.selectedSport = sport;
@@ -36,9 +57,11 @@ app.config(function($stateProvider){
                     }
                   }
                 $scope.events = filteredList;
+                $scope.markers = getMarkers();
                }
 
                $scope.filterDistance = function(distance) {
+                $scope.events = events;
                 var data = {
                     userLoc: $scope.userLoc,
                     events: $scope.events,
@@ -48,11 +71,13 @@ app.config(function($stateProvider){
                 if ($scope.userLocReady) {
                   $http.post('/api/events/findNearby', data).then(function(res){
                     $scope.events = res.data;
+                    $scope.markers = getMarkers();
                   })
-                }
+                }                
               }
 
               $scope.specifyDate = function(date){
+                $scope.events = events;
                 var t = new Date(date).getTime();
 
                 $scope.events = $scope.events.filter(function(event){
@@ -63,12 +88,17 @@ app.config(function($stateProvider){
                     return event
                   }
                 })
+
+                $scope.selectedFilter = $scope.specifyDate;
               }
               $scope.removeFilters = function() {
                 $scope.events = events;
                 $scope.filter = {};
+                $scope.markers = getMarkers();
               }
+
               $scope.search = function(query) {
+                $scope.events = events;
                 var query = query.toString();
                 var matches = [];
 
@@ -85,8 +115,11 @@ app.config(function($stateProvider){
                     }
                 })
                 $scope.events = matches;
+                $scope.markers = getMarkers();
               }
+
               $scope.filterTime = function(time){
+                  $scope.events = events;
                   var now = new Date();
                   var then;
 
@@ -101,8 +134,6 @@ app.config(function($stateProvider){
                       then = new Date().setDate(now.getDate()+14);
 
                   }                  
-                  console.log(then);
-
                   var filteredEvents = $scope.events.filter(function(event){
                     var d = new Date(event.date);
                     if (d < then) {
@@ -116,8 +147,8 @@ app.config(function($stateProvider){
                     if (dateA > dateB) return 1;
                     return 0;
                   });
-                  console.log(filteredEvents);
                   $scope.events = filteredEvents
+                  $scope.markers = getMarkers();
                 }
            }
        })

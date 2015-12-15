@@ -49,9 +49,11 @@ function findNearby(userLoc, eventsArray, distance){
 	}
 
 	var filteredEvents = eventsArray.filter(function(event){
-		if (findDistance(userLoc, event) < maxDistance) {
-			return event;
-		}	 
+		if (event.location) {
+			if (findDistance(userLoc, event) < maxDistance) {
+				return event;
+			}	
+		} 
 	})
 	return filteredEvents;
 }

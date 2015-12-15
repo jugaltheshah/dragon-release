@@ -16,6 +16,30 @@ app.config(function($stateProvider){
                 $scope.users = users;
            }
        })
+       .state('userInterest', {
+        url: '/users/interest/:id',
+        templateUrl: 'js/user/interest.html',
+        resolve: {
+          user: function(UserFactory, $stateParams){
+                   return UserFactory
+                       .getUserById($stateParams.id)
+                       .then(function(res){
+                           return res.data;
+                       })
+               },
+               me: function(AuthService){
+                   return AuthService.getLoggedInUser()
+                       .then(function(res){
+                           return res;
+                       })
+               },
+        },
+        controller: function($scope, UserFactory, user, me){
+          $scope.user = user;
+          console.log($scope.user);
+        }
+
+       })
        .state('userDetail', {
            url: '/users/detail/:id',
            templateUrl: 'js/user/profile.html',
