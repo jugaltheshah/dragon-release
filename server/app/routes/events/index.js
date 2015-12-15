@@ -14,6 +14,7 @@ router.get('/sport/:sport', function(req, res, next){
         .find({
             sport: req.params.sport
         })
+        .populate('host attendees comments.user')
         .then(function(events){
             console.log(events);
             res.json(events);
@@ -29,6 +30,7 @@ router.get('/date/:date', function(req, res, next){
     // If filtering - date field is string, will be hard to compare greater than, less than, etc
     Event
         .find({'dateTime.date': { "$gte" : req.params.date}})
+        .populate('host attendees comments.user')
         .then(function(events){
             console.log(events);
             res.json(events);
@@ -44,6 +46,7 @@ router.get('/sportandtime/:sport/:date', function(req, res, next){
     Event
         .find({'dateTime.date': { "$gte" : req.params.date}})
         .where('sport').equals(req.params.sport)
+        .populate('host attendees comments.user')
         .then(function(events){
             console.log(events);
             res.json(events);
