@@ -6,3 +6,4 @@ video
 public
 .DS_Store
 coverage
+.env
