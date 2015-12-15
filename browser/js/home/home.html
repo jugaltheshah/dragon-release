@@ -22,7 +22,7 @@
                             md-items="item in querySearch(searchText)"
                             md-item-text="item.name"
                             md-min-length="1"
-                            placeholder="Pick an Angular repository"
+                            placeholder="Search for an Event"
                             md-menu-class="autocomplete-custom-template">
                         <md-item-template>
                                 <span class="item-title">
@@ -35,7 +35,7 @@
                         </md-item-template>
                         <md-not-found>
                             No events were found.
-                            <a ng-click="gotoCreateEvent()">Create a event!</a>
+                            <a ng-click="gotoCreateEvent()">Create an event!</a>
                         </md-not-found>
                     </md-autocomplete>
                 </form>
