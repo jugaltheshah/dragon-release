@@ -38,7 +38,6 @@ app.factory('EventFactory', function($http, Socket){
         getEventById: getEventById,
         getEvents: getEvents,
         updateEvent: updateEvent,
-		sportsList: sportsList,
         getEventsByAttendee: getEventsByAttendee,
         getEventsByHost: getEventsByHost,
         getEventsByMatchAddress: getEventsByMatchAddress,
