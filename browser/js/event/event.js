@@ -82,7 +82,7 @@ app.config(function($stateProvider){
 
                 $scope.events = $scope.events.filter(function(event){
                   var d = new Date(event.date).getTime()
-                
+
                   if (d == t){
                     console.log('Match!');
                     return event
@@ -132,8 +132,7 @@ app.config(function($stateProvider){
                       break;
                     case 'nextweek':
                       then = new Date().setDate(now.getDate()+14);
-
-                  }                  
+                  }
                   var filteredEvents = $scope.events.filter(function(event){
                     var d = new Date(event.date);
                     if (d < then) {
@@ -234,15 +233,38 @@ app.config(function($stateProvider){
                     var addressString_post = addressString_pre.split(' ').join('+');
                     Utils.getCoordinates(addressString_post)
                         .then(function(res){
-                            $scope.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                            $scope.event.location = {};
+                            if(res.data.status === 'OK') {
+                                $scope.event.location.latitude = res.data.results[0].geometry.location.lat;
+                                $scope.event.location.longitude = res.data.results[0].geometry.location.lng;
+                            }
                             return EventFactory.createEvent($scope.event)
                         })
                         .then(function(res){
+                            console.log(res.data);
                             $state.go('eventDetail', {id: res.data._id});
                         });
                };
                $scope.sportsList = Utils.sportsList;
                $scope.states = Utils.getStates();
+
+               $scope.getAddressQuery = function(q){
+                   return EventFactory.getEventsByMatchAddress(q)
+                        .then(function(res){
+                            return res.data;
+                        })
+               }
+                $scope.selectedItemChange = function(event){
+                    console.log('test', event.address1);
+                    $scope.event = {};
+                    $scope.event.address1 = event.address1;
+                    $scope.event.address2 = event.address2;
+                    $scope.event.city = event.city;
+                    $scope.event.state = event.state;
+                    $scope.event.zip = event.zip;
+                    $scope.selectedItem = null;
+                }
+
            }
        })
        .state('eventUpdate', {
@@ -272,15 +294,40 @@ app.config(function($stateProvider){
                    console.log(addressString_post);
                    Utils.getCoordinates(addressString_post)
                        .then(function(res){
-                           $scope.event.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
+                           if(!$scope.event.location) {
+                               $scope.event.location = {};
+                           }
+                           if(res.data.status === 'OK') {
+                               $scope.event.location.latitude = res.data.results[0].geometry.location.lat;
+                               $scope.event.location.longitude = res.data.results[0].geometry.location.lng;
+                           }
+                           //$scope.event.location = (res.data.status === 'OK') ? res.data.results[0].geometry.location : null;
                            return EventFactory.updateEvent($scope.event)
                        })
                        .then(function(res){
+                           console.log(res);
                            $state.go('eventDetail', {id: res.data._id});
                        });
                }
                $scope.sportsList = Utils.sportsList;
                $scope.states = Utils.getStates();
+
+               $scope.getAddressQuery = function(q){
+                   return EventFactory.getEventsByMatchAddress(q)
+                       .then(function(res){
+                           return res.data;
+                       })
+               }
+               $scope.selectedItemChange = function(event){
+                   console.log('test', event.address1);
+                   $scope.event = {};
+                   $scope.event.address1 = event.address1;
+                   $scope.event.address2 = event.address2;
+                   $scope.event.city = event.city;
+                   $scope.event.state = event.state;
+                   $scope.event.zip = event.zip;
+                   $scope.selectedItem = null;
+               }
            }
        });
 });

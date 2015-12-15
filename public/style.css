@@ -340,3 +340,29 @@ md-content md-tabs {
     background-color: white; }
   .md-datepicker-calendar .md-calendar-scroll-mask {
     background-color: white; }
+
+#findNearMeSection {
+  padding-left: 20px; }
+
+#eventsList {
+  height: 700px;
+  overflow-y: scroll; }
+
+#cardForOneEvent {
+  cursor: pointer; }
+
+#cardForOneEvent:hover {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.67);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.67);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.67); }
+
+#cardForOneEvent:last-of-type:hover {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.67);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.67);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.67); }

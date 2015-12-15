@@ -11,10 +11,26 @@ app.factory('EventFactory', function($http, Socket){
         return $http.get('/api/events/'+id);
     }
 
+    function getEventsByHost(user){
+        return $http.get('/api/events/host/'+user._id);
+    }
+
+    function getEventsByAttendee(user){
+        return $http.get('/api/events/attendee/'+user._id);
+    }
+
     function getEvents() {
         return $http.get('/api/events').then(function(res){
             return res.data;
         });
+    }
+
+    function getEventsByMatchAddress(q) {
+        return $http.get('/api/events/address/'+q);
+    }
+
+    function searchOverallEvent(q){
+        return $http.get('/api/events/all/'+q);
     }
 
 	return {
@@ -22,5 +38,10 @@ app.factory('EventFactory', function($http, Socket){
         getEventById: getEventById,
         getEvents: getEvents,
         updateEvent: updateEvent,
+		sportsList: sportsList,
+        getEventsByAttendee: getEventsByAttendee,
+        getEventsByHost: getEventsByHost,
+        getEventsByMatchAddress: getEventsByMatchAddress,
+        searchOverallEvent: searchOverallEvent
 	}
 });
