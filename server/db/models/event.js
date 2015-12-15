@@ -51,5 +51,11 @@ var schema = new mongoose.Schema({
     }]
 })
 
+schema
+    .virtual('echoDate')
+    .get(function () {
+        var date = new Date(dateTime.date);
+        return date.getTime();
+    });
 
 module.exports = mongoose.model('Event', schema)

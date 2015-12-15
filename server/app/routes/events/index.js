@@ -24,16 +24,26 @@ router.get('/sport/:sport', function(req, res, next){
 // Get events by date (always current time or after)
 router.get('/date/:date', function(req, res, next){
     console.log('Called! Getting Events for date ', req.params.date , " or greater!");
-    var today = new Date();
-    var dt = new Date("12/16/2015");
-
     // Do we want to find all events and then filter or try to set query
     // If finding all - "expensive" operation
     // If filtering - date field is string, will be hard to compare greater than, less than, etc
     Event
-        .find({
-            date: "12/03/2015"
+        .find({'dateTime.date': { "$gte" : req.params.date}})
+        .then(function(events){
+            console.log(events);
+            res.json(events);
         })
+        .then(null, next);
+});
+
+router.get('/sportandtime/:sport/:date', function(req, res, next){
+    console.log('Called! Getting Events for date ', req.params.date , " or greater!");
+    // Do we want to find all events and then filter or try to set query
+    // If finding all - "expensive" operation
+    // If filtering - date field is string, will be hard to compare greater than, less than, etc
+    Event
+        .find({'dateTime.date': { "$gte" : req.params.date}})
+        .where('sport').equals(req.params.sport)
         .then(function(events){
             console.log(events);
             res.json(events);
