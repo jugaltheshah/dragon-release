@@ -140,6 +140,7 @@ app.config(function($stateProvider){
            },
            controller: function($scope, event, user, EventFactory, $state) {
                $scope.event = event;
+               console.log('event', event);
                $scope.reserved = false;
                console.log($scope.event.host);
                $scope.user = user;
@@ -182,6 +183,18 @@ app.config(function($stateProvider){
                            $state.go('eventDetail', {id: res.data._id});
                        });
                };
+
+
+               $scope.addComment = function(c){
+                   var temp = {user: user, content: c};
+                   $scope.event.comments.push(angular.copy(temp));
+                   EventFactory.updateEvent($scope.event)
+                       .then(function(res){
+                          $state.go('eventDetail', {id: res.data._id});
+                       });
+
+               }
+
            }
 
        })

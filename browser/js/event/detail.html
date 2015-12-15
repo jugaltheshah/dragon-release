@@ -47,8 +47,18 @@
                 </div>
             </div>
             <div layout="column">
-
+                <div flex>
+                    <div ng-repeat="comment in event.comments">
+                        <div ng-bind-html="comment.content"></div>
+                        <div ui-sref="userDetail({id:comment.user._id})">
+                            <img ng-src={{comment.user.profilePicture}}>
+                            <span>{{comment.user.userName}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <editor id="description" content="tempComment"></editor>
+            <button ng-click="addComment(tempComment)">Submit</button>
         </div>
         <div flex="30">
             <md-content>
@@ -74,8 +84,8 @@
             <md-divider ></md-divider>
             <md-content>
                 <button class="md-raised md-button md-ink-ripple" type="button" style="margin-left:0; margin-right:0;"><span>Host</span><div class="md-ripple-container"></div></button>
-                <div>{{event.host.userName}}</div>
-                <img class="img-circle" style="width: 15%; height: 15%" src="{{event.host.profilePicture}}">
+                <div ui-sref="userDetail({id: event.host._id})">{{event.host.userName}}</div>
+                <img ui-sref="userDetail({id: event.host._id})" class="img-circle" style="width: 15%; height: 15%" src="{{event.host.profilePicture}}">
             </md-content>
             <md-divider ></md-divider>
             <md-content>
@@ -87,7 +97,7 @@
                     </md-subheader>
                     <md-list-item class="md-3-line" ng-repeat="attendee in event.attendees">
                         <div ui-sref="userDetail({id: attendee._id})">
-                            <img class="img-responsive" src="{{attendee.profilePicture}}">
+                            <img  style="width: 50%; height: 50%"  class="img-responsive" src="{{attendee.profilePicture}}">
                         </div>
                         <div class="md-list-item-text" layout="column">
                             <h3 ui-sref="userDetail({id: attendee._id})">{{ attendee.userName }}</h3>

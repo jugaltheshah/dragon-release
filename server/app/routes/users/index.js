@@ -66,3 +66,13 @@ router.get('/:id', function(req, res, next){
         .then(null, next);
 });
 
+router.get('/fb/:id', function(req, res, next){
+    User
+        .findOne({'facebook.id': req.params.id})
+        .then(function(doc){
+            res.json(doc);
+        })
+        .then(null, next);
+});
+
+

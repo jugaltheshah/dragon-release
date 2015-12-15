@@ -36,6 +36,7 @@ app.config(function($stateProvider){
                fb_friends: function(FacebookFactory, user){
                    return FacebookFactory.getFriends(user)
                        .then(function(res){
+                           console.log('fb', res);
                            return res.data;
                        });
                },
@@ -52,7 +53,7 @@ app.config(function($stateProvider){
                        });
                }
            },
-           controller: function($scope, user, me, events, fb_friends, FacebookFactory){
+           controller: function($scope, user, me, events, fb_friends, FacebookFactory, UserFactory){
                $scope.friends = [];
                $scope.events = events;
                var tempHost={};
@@ -79,10 +80,22 @@ app.config(function($stateProvider){
                console.log($scope.hosts);
                console.log($scope.attendees);
                angular.forEach(fb_friends, function(friend){
+                   var fb_temp = {};
                    FacebookFactory.getPortrait(friend, me)
                        .then(function(res){
-                           $scope.friends.push({id: friend.id, name: friend.name, picture:res.data.url});
+                           //$scope.friends.push({id: friend.id, name: friend.name, picture:res.data.url});
+                           fb_temp.id = friend.id;
+                           fb_temp.name = friend.name;
+                           fb_temp.picture = res.data.url;
+                           console.log(fb_temp);
+                           return UserFactory.getUserByFBId(friend.id);
+                       })
+                       .then(function(res){
+                           console.log(res);
+                            fb_temp._id = res.data._id;
+                            $scope.friends.push(angular.copy(fb_temp));
                        });
+
                });
                $scope.user = user;
                $scope.me = me;
