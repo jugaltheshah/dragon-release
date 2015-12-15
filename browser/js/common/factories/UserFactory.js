@@ -46,12 +46,17 @@ app.factory('UserFactory', function($http){
         return $http.delete('/api/users/'+id);
     }
 
+    function getUserByFBId(id){
+        return $http.get('/api/users/fb/'+id);
+    }
+
     return {
         getUsers: getUsers,
         getUserById: getUserById,
         updateUser: updateUser,
         createUser: createUser,
-        removeUser: removeUser
+        removeUser: removeUser,
+        getUserByFBId: getUserByFBId
     }
 
 });
